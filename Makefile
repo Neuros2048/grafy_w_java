@@ -10,3 +10,6 @@ Wieszcholek:
 
 uruchom:
 	java Start
+
+czysc:
+	del *.class
