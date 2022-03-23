@@ -1,8 +1,8 @@
 
 public class Start {
     public static void main(String[] args) {
-        int x = 50;
-        int y = 50;
+        int x = 100;
+        int y = 100;
         Wieszcholek[] graf = new Wieszcholek[x*y];
         int i;
         for (i=0;i<x*y;i++){

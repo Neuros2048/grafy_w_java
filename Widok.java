@@ -25,7 +25,9 @@ public class Widok  extends JPanel{
         skala = 1;
         max = x * y;
         this.setPreferredSize(new DimensionUIResource(Dx, Dy));
-        skaluj();
+        
+        
+        //skaluj();
     }
     private void skaluj() {
         int work = 1;
@@ -46,7 +48,7 @@ public class Widok  extends JPanel{
         double d = 256/20; //magiczna stała na kolory XD
         double kolor = 100*waga/max;
         if (kolor<20){
-            r = 255 - (int)Math.round(d*kolor);
+            r = 150 - (int)Math.round(d*kolor)/2;
             b = 255;
         }else if (kolor<40){
             g = (int)Math.round(d*(kolor-20));
@@ -65,22 +67,33 @@ public class Widok  extends JPanel{
     }
     public void paint(Graphics g){  //sama sie urzywa
         int i,ii;
-        
+        Graphics2D g2D = (Graphics2D) g; // więcej popcji graficznych
+        g.setColor(Color.black);
+        g.fillRect(0, 0, Dx, Dy);
+        //g2D.scale(1, 0.5);
+        g2D.scale((double)Dx/rozmiarx/x/3*2, (double)Dy/rozmiary/y/3*2);
+        System.out.println((double)Dx/rozmiarx/x/3*2 + (double)Dy/rozmiary/y/3*2);
+        //g2D.scale(1, 1);
+        //g.setColor(new Color(0,0,0));
+        /*
         for (i =0 ;i<y;i++){
             for (ii = 0;ii<x;ii++){
                 g.setColor(tecza(graf[ii+i*x].waga));
                 g.fillRect(ii*rozmiarx, i*rozmiary, rozmiarx, rozmiary);
             }
-        }
-        g.setColor(new Color(0,0,0));
+        }*/
+        
+        
         for (i =0 ;i<y;i++){
             for (ii = 0;ii<x;ii++){
-                g.fillOval(rozmiarx/4 + ii*rozmiarx,rozmiary/4 + i*rozmiary, rozmiarx/2, rozmiary/2);
+                g.setColor(tecza(graf[ii+i*x].waga));
+                g.fillOval(rozmiarx/8 + ii*rozmiarx/2*3,rozmiary/8 + i*rozmiary/2*3, rozmiarx, rozmiary);
             }
         }
+        System.out.println("end is now!");
         
         
-        Graphics2D g2D = (Graphics2D) g;
+        
 
     }
 }

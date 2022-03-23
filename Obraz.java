@@ -1,5 +1,4 @@
 import javax.swing.JFrame;
-
 public class Obraz extends JFrame {
     Widok panel;
     Obraz(int x,int y,Wieszcholek[] graf){
