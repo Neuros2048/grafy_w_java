@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Wieszcholek {
     int x ;
     double waga;
@@ -6,12 +8,21 @@ public class Wieszcholek {
     double DG;
     double DD;
         Wieszcholek(int x){
-            this.x = x-1;
-            this.waga = x;
-            this.DG = 1;
-            this.DG = 1;
-            this.DL = 1;
-            this.DP = 1;
+            this.x = x;
+            this.waga = Math.abs(x-5000) ;
+
+            if (x>=8000){
+                this.DG = -1;
+                this.DD = -1;
+                this.DL = -1;
+                this.DP = -1;
+
+            }else {
+                this.DG = new Random().nextInt(10);
+                this.DG = new Random().nextInt(10);
+                this.DL = new Random().nextInt(10);
+                this.DP = new Random().nextInt(10);
+            }
 
         }
 }
