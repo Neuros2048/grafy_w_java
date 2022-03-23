@@ -1,8 +1,11 @@
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.plaf.DimensionUIResource;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 
 public class Widok  extends JPanel{
     int x;
@@ -18,12 +21,13 @@ public class Widok  extends JPanel{
         this.graf = graf;
         this.x =x;
         this.y = y;
-        Dx = 1600;
-        Dy = 1000;
         rozmiarx = 8;
         rozmiary = 8;
         skala = 1;
         max = x * y;
+        Dimension Wymiary_ekranu = Toolkit.getDefaultToolkit().getScreenSize(); // Bierze wymiary ekranu.
+        Dy = Wymiary_ekranu.height/10 *9;
+        Dx =  Wymiary_ekranu.width/10 * 9;
         this.setPreferredSize(new DimensionUIResource(Dx, Dy));
         
         
@@ -83,13 +87,56 @@ public class Widok  extends JPanel{
             }
         }*/
         
-        
+        int pozycja_x;
+        int pozycja_y;
         for (i =0 ;i<y;i++){
             for (ii = 0;ii<x;ii++){
-                g.setColor(tecza(graf[ii+i*x].waga));
-                g.fillOval(rozmiarx/8 + ii*rozmiarx/2*3,rozmiary/8 + i*rozmiary/2*3, rozmiarx, rozmiary);
+                pozycja_x = rozmiarx/8 + ii*rozmiarx/2*3;
+                pozycja_y = rozmiary/8 + i*rozmiary/2*3;
+
+                g2D.setColor(Color.red);
+                if (graf[ii+i*x].DP!= -1){   
+                    g2D.drawLine(pozycja_x + rozmiarx, pozycja_y + rozmiary/2 , pozycja_x + rozmiarx/2*3 , pozycja_y+rozmiary/2);
+                }
+                if (graf[ii+i*x].DD!= -1){   
+                    g2D.drawLine(pozycja_x + rozmiarx/2, pozycja_y + rozmiary, pozycja_x + rozmiarx/2 , pozycja_y+rozmiary/2*3);
+                }
+
+                
+
+                g2D.setColor(tecza(graf[ii+i*x].waga));
+                g2D.fillOval(pozycja_x,pozycja_y, rozmiarx, rozmiary);
+                
             }
         }
+        g2D.setColor(Color.white);
+        for (i =0 ;i<y;i++){
+            for (ii = 0;ii<x;ii++){
+                pozycja_x = rozmiarx/8 + ii*rozmiarx/2*3;
+                pozycja_y = rozmiary/8 + i*rozmiary/2*3;
+                
+                if (graf[ii+i*x].x== ii+i*x -1 ){   
+                    g2D.drawLine(pozycja_x, pozycja_y + rozmiary/2 , pozycja_x - rozmiarx/2 , pozycja_y+rozmiary/2);
+                }else if (graf[ii+i*x].x== ii+i*x +1 ){   
+                    g2D.drawLine(pozycja_x+rozmiarx, pozycja_y + rozmiary/2 , pozycja_x + rozmiarx/2*3 , pozycja_y+rozmiary/2);
+                }else if (graf[ii+i*x].x== ii+(i-1)*x){   
+                    g2D.drawLine(pozycja_x + rozmiarx/2, pozycja_y, pozycja_x + rozmiarx/2 , pozycja_y - rozmiary/2);
+                }else if (graf[ii+i*x].x== ii+(i+1)*x ){   
+                    g2D.drawLine(pozycja_x + rozmiarx/2, pozycja_y + rozmiary, pozycja_x + rozmiarx/2 , pozycja_y + rozmiary/2*3);
+                }
+                
+                
+            }
+        }
+        for (i =0 ;i<y;i++){
+            for (ii = 0;ii<x;ii++){
+                pozycja_x = rozmiarx/8 + ii*rozmiarx/2*3;
+                pozycja_y = rozmiary/8 + i*rozmiary/2*3;
+                g2D.setColor(Color.white);
+                
+            }
+        }
+        
         System.out.println("end is now!");
         
         
