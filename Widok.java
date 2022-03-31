@@ -28,22 +28,6 @@ public class Widok  extends JPanel{
         Dx =  Wymiary_ekranu.width/10 * 9;
         this.setPreferredSize(new DimensionUIResource(Dx, Dy));
         
-        
-        //skaluj();
-    }
-    private void skaluj() {
-        int work = 1;
-        while (work==1){
-            work = 0;
-            if (x*rozmiarx*3/2<Dx ){
-                rozmiarx = rozmiarx*3/2;
-                work = 1 ;
-            }
-            if (y*rozmiary*3/2<Dy ){
-                rozmiary = rozmiary*3/2;
-                work = 1;
-            }
-        }
     }
     private void najwieksze(Wieszcholek[] graf){
         int i;
@@ -124,9 +108,7 @@ public class Widok  extends JPanel{
     }
     private Color tecza(double waga1,double waga2){
         int r=0,g=0,b=0;
-        System.out.println(maxw+ "ds" + minw);
         double d = 256/20; //magiczna stała na kolory XD
-        //double kolor = 100*waga/max;
         double kolor = 100*((waga1+waga2)/2-minw)/(maxw-minw) ;
         if (kolor<20){
             r = 150 - (int)Math.round(d*kolor)/2;
@@ -154,18 +136,7 @@ public class Widok  extends JPanel{
         Graphics2D g2D = (Graphics2D) g; // więcej popcji graficznych
         g.setColor(Color.black);
         g.fillRect(0, 0, Dx, Dy);
-        //g2D.scale(1, 0.5);
         g2D.scale((double)Dx/rozmiarx/x/3*2, (double)Dy/rozmiary/y/3*2);
-        //g2D.scale(1, 1);
-        //g.setColor(new Color(0,0,0));
-        /*
-        for (i =0 ;i<y;i++){
-            for (ii = 0;ii<x;ii++){
-                g.setColor(tecza(graf[ii+i*x].waga));
-                g.fillRect(ii*rozmiarx, i*rozmiary, rozmiarx, rozmiary);
-            }
-        }*/
-        
         int pozycja_x;
         int pozycja_y;
         g2D.setStroke(new BasicStroke(1));
@@ -214,11 +185,5 @@ public class Widok  extends JPanel{
                 
             }
         }
-        
-        System.out.println("end is now!");
-        
-        
-        
-
     }
 }
