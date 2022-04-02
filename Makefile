@@ -1,4 +1,4 @@
-compiluj: Start Obraz Widok Wieszcholek uruchom
+compiluj: Start Obraz Widok Wieszcholek Czytacz uruchom
 Start: 
 	javac Start.java
 Obraz:
@@ -7,9 +7,10 @@ Widok:
 	javac Widok.java
 Wieszcholek:
 	javac Wieszcholek.java
-
+Czytacz:
+	javac Czytacz.java
 uruchom:
-	java Start
+	java Start mygraph.txt
 
 czysc:
 	del *.class
