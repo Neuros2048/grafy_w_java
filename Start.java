@@ -17,7 +17,12 @@ public class Start {
             graf[i] = new Wieszcholek(i);
         }
         dane_pliku.wypelnij(graf, x,y);
+        Dijkstra aklorytm = new Dijkstra(graf, x);
+        aklorytm.rozwiarz(0);
         System.out.println(graf[2].DP);
+        for (i=0;i<x*y;i++){
+            System.out.println(graf[i].waga);
+        }
         new Obraz(x,y,graf);
 
     }

@@ -1,4 +1,4 @@
-compiluj: Start Obraz Widok Wieszcholek Czytacz uruchom
+compiluj: Start Obraz Widok Wieszcholek Czytacz Lista Dijkstra uruchom
 Start: 
 	javac Start.java
 Obraz:
@@ -9,6 +9,10 @@ Wieszcholek:
 	javac Wieszcholek.java
 Czytacz:
 	javac Czytacz.java
+Lista:
+	javac Lista.java
+Dijkstra:
+	javac Dijkstra.java
 uruchom:
 	java Start mygraph.txt
 
