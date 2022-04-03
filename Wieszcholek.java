@@ -1,4 +1,4 @@
-import java.util.Random;
+
 
 public class Wieszcholek {
     public int x ;
@@ -9,7 +9,7 @@ public class Wieszcholek {
     public double DG;
     public double DD;
         Wieszcholek(int x){
-            this.x = -1;
+            this.x = -2;
             this.status = 0;
             this.waga = -1 ;
             this.DG = -1;

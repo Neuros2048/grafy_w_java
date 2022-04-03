@@ -44,9 +44,6 @@ public class Lista {
         Lista tymczasowa = start;
         Lista porzedni;
         while(tymczasowa.nastepny!=null){
-            System.out.println(tymczasowa.klucz);
-            System.out.println(tymczasowa.nastepny.klucz);
-            System.out.println("nowe");
             porzedni = tymczasowa;
             tymczasowa = tymczasowa.nastepny;
             if (graf[tymczasowa.klucz].waga>graf[this.klucz].waga){
@@ -64,13 +61,10 @@ public class Lista {
         Lista tymczasowy = start;
         while(tymczasowy.nastepny!=this){
             tymczasowy = tymczasowy.nastepny;
-            System.out.println("pentla po kluczu");
         }
-        System.out.println("co jest?");
         return tymczasowy;
     }
     public void przetasuj(Wieszcholek[] graf){
-        System.out.println("haloo");
         if (start==this){
             return;
         }
@@ -91,16 +85,14 @@ public class Lista {
                 poprzedni.nastepny = this;
                 return;
             }
-            System.out.println("pentla po wagfach");
+            
         }
-        System.out.println("koniec pentli po wagach");
         
     }
     public Lista znajc_klucz(int klucz){
         Lista tymczasowy = start;
         while(tymczasowy.klucz!=klucz){
             tymczasowy = tymczasowy.nastepny;
-            System.out.println("czy to ty");
         }
         return tymczasowy;
     }

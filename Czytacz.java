@@ -21,12 +21,10 @@ public class Czytacz  {
     }
 
     public void wypelnij(Wieszcholek[] graf,int x,int y){
-        int i,j;
+        int i;
         int xy =x*y;
-        int polaczenie = 32;
+        int polaczenie;
         String c ="ds";
-        String Linia;
-        char liter;
         Double waga;
         skan.nextLine();
         for (i=0;i<xy;i++){

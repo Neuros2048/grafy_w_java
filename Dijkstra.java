@@ -10,11 +10,9 @@ public class Dijkstra {
         przedstawicel.stworzenie();
         int startx;
         int xdo;
-        double droga;
         graf[poczontek].waga = 0;
-        graf[poczontek].x = -1;
+        graf[poczontek].x = -2;
         while(przedstawicel.ile_elemntow()>0){
-            System.out.println(przedstawicel.co_start().weź_klucz()+" ile "+przedstawicel.ile_elemntow());
             startx = przedstawicel.zabierz_start();
             graf[startx].status = 2;
             if (graf[startx].DG != -1){
@@ -69,7 +67,12 @@ public class Dijkstra {
                     przedstawicel.znajc_klucz(xdo).przetasuj(graf);
                 }
             }
-            System.out.println("koniec pentli");
+        }
+    }
+    public void okresl_scieszke(Wieszcholek[] graf,int szukane){
+        while(szukane != -2){
+            graf[szukane].status = 3;
+            szukane = graf[szukane].x; 
         }
     }
 }
