@@ -19,10 +19,10 @@ public class Start {
         }
         dane_pliku.wypelnij(graf, x,y);
         Dijkstra algorymt = new Dijkstra(graf, x);
-        /*if(algorymt.czy_istnieje(poczontek, szukane, x*y)){
+        if(algorymt.czy_istnieje(poczontek, szukane, x*y)){
             System.out.println("Nie ma połaczenia miedzy elementami");
             return;
-        }*/
+        }
         algorymt.rozwiarz(poczontek);
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);

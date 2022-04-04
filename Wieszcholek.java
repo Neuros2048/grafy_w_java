@@ -11,7 +11,7 @@ public class Wieszcholek {
         Wieszcholek(int x){
             this.x = -2;
             this.status = 0;
-            this.waga = -1 ;
+            this.waga = 0 ;
             this.DG = -1;
             this.DD = -1;
             this.DL = -1;
