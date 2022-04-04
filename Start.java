@@ -18,12 +18,16 @@ public class Start {
             graf[i] = new Wieszcholek(i);
         }
         dane_pliku.wypelnij(graf, x,y);
-        Dijkstra aklorytm = new Dijkstra(graf, x);
-        aklorytm.rozwiarz(poczontek);
+        Dijkstra algorymt = new Dijkstra(graf, x);
+        /*if(algorymt.czy_istnieje(poczontek, szukane, x*y)){
+            System.out.println("Nie ma połaczenia miedzy elementami");
+            return;
+        }*/
+        algorymt.rozwiarz(poczontek);
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);
         }*/
-        aklorytm.okresl_scieszke(graf,szukane);
+        algorymt.okresl_scieszke(szukane);
         new Obraz(x,y,graf);
 
     }

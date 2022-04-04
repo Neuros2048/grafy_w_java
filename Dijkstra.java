@@ -69,10 +69,59 @@ public class Dijkstra {
             }
         }
     }
-    public void okresl_scieszke(Wieszcholek[] graf,int szukane){
+    public void okresl_scieszke(int szukane){
         while(szukane != -2){
             graf[szukane].status = 3;
             szukane = graf[szukane].x; 
         }
+    }
+    public boolean czy_istnieje(int start,int koniec,int xy){
+        boolean wynik = true; // czy nie działa
+        Lista przedstawicel = new Lista(start);
+        przedstawicel.stworzenie();
+        int startx;
+        int xdo; //bo czemu nie 
+        
+        graf[start].status = 2;
+        while(przedstawicel.ile_elemntow()>0){
+            startx = przedstawicel.zabierz_start();
+            if (graf[startx].DG != -1){
+                xdo = startx-x;
+                if (graf[xdo].status==0){
+                    graf[xdo].status = 2;
+                    new Lista(xdo).wtasuj(graf);
+                }
+            }
+            if (graf[startx].DP != -1){
+                xdo = startx+1;
+                if (graf[xdo].status==0){
+                    graf[xdo].status = 2;
+                    new Lista(xdo).wtasuj(graf);
+                }
+            }
+            if (graf[startx].DD != -1){
+                xdo = startx+x;
+                if (graf[xdo].status==0){
+                    graf[xdo].status = 2;
+                    new Lista(xdo).wtasuj(graf);
+                }
+            }
+            if (graf[startx].DL != -1){
+                xdo = startx-1;
+                if (graf[xdo].status==0){
+                    graf[xdo].status = 2;
+                    new Lista(xdo).wtasuj(graf);
+                }
+            }
+        }
+        if (graf[koniec].status==2){
+            wynik = false;
+        }
+        for (int i = 0 ;i<xy;i++){
+            graf[i].status=0;
+        }
+
+
+        return wynik;
     }
 }
