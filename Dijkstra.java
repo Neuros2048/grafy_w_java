@@ -78,7 +78,7 @@ public class Dijkstra {
     public boolean czy_istnieje(int start,int koniec,int xy){
         boolean wynik = true; // czy nie działa
         Lista przedstawicel = new Lista(start);
-        przedstawicel.stworzenie(graf);
+        przedstawicel.stworzenie();
         int startx;
         int xdo; //bo czemu nie 
         
@@ -119,7 +119,6 @@ public class Dijkstra {
         }
         for (int j =0 ;j <xy;j++){
             if (graf[j].status==2 ){
-                System.out.println(j+" status "+ graf[j].status);
             }
         }
         for (int i = 0 ;i<xy;i++){

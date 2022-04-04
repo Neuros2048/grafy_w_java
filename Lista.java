@@ -15,6 +15,11 @@ public class Lista {
         Lista.graf = graf;
         ile = 1;
     }
+    public void stworzenie(){ // zawsze urzyć na początek
+        start = this;
+        koniec = this;
+        ile = 1;
+    }
     public int weź_klucz(){
         return klucz;
     }
