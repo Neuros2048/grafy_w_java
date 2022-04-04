@@ -7,7 +7,7 @@ public class Dijkstra {
     }
     public void rozwiarz(int poczontek){
         Lista przedstawicel = new Lista(poczontek);
-        przedstawicel.stworzenie();
+        przedstawicel.stworzenie(graf);
         int startx;
         int xdo;
         graf[poczontek].waga = 0;
@@ -21,11 +21,11 @@ public class Dijkstra {
                     graf[xdo].x = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DG;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DG){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DG;
-                    przedstawicel.znajc_klucz(xdo).przetasuj(graf);
+                    przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
             }
             if (graf[startx].DP != -1){
@@ -34,11 +34,11 @@ public class Dijkstra {
                     graf[xdo].x = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DP;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DP){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DP;
-                    przedstawicel.znajc_klucz(xdo).przetasuj(graf);
+                    przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
             }
             if (graf[startx].DD != -1){
@@ -47,11 +47,11 @@ public class Dijkstra {
                     graf[xdo].x = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DD;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DD){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DD;
-                    przedstawicel.znajc_klucz(xdo).przetasuj(graf);
+                    przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
             }
             if (graf[startx].DL != -1){
@@ -60,11 +60,11 @@ public class Dijkstra {
                     graf[xdo].x = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DL;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DL){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DL;
-                    przedstawicel.znajc_klucz(xdo).przetasuj(graf);
+                    przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
             }
         }
@@ -78,7 +78,7 @@ public class Dijkstra {
     public boolean czy_istnieje(int start,int koniec,int xy){
         boolean wynik = true; // czy nie działa
         Lista przedstawicel = new Lista(start);
-        przedstawicel.stworzenie();
+        przedstawicel.stworzenie(graf);
         int startx;
         int xdo; //bo czemu nie 
         
@@ -89,28 +89,28 @@ public class Dijkstra {
                 xdo = startx-x;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }
             }
             if (graf[startx].DP != -1){
                 xdo = startx+1;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }
             }
             if (graf[startx].DD != -1){
                 xdo = startx+x;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }
             }
             if (graf[startx].DL != -1){
                 xdo = startx-1;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj(graf);
+                    new Lista(xdo).wtasuj();
                 }
             }
         }

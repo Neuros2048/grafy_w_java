@@ -2,15 +2,17 @@ public class Lista {
     private static Lista start;
     private static Lista koniec;
     private static int ile;
+    private static Wieszcholek[] graf;
     private Lista nastepny;
     private int klucz;
     Lista(int klucz){
         this.klucz = klucz;
         nastepny = null;
     }
-    public void stworzenie(){ // zawsze urzyć na początek
+    public void stworzenie(Wieszcholek[] graf){ // zawsze urzyć na początek
         start = this;
         koniec = this;
+        Lista.graf = graf;
         ile = 1;
     }
     public int weź_klucz(){
@@ -30,7 +32,7 @@ public class Lista {
         start = start.nastepny;
         return klucz;
     }
-    public void wtasuj(Wieszcholek[] graf){
+    public void wtasuj(){
         ile++;
         if (start==null){
             start = this;
@@ -64,7 +66,7 @@ public class Lista {
         }
         return tymczasowy;
     }
-    public void przetasuj(Wieszcholek[] graf){
+    public void przetasuj(){
         if (start==this){
             return;
         }
