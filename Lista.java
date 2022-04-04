@@ -22,9 +22,14 @@ public class Lista {
         return nastepny;
     }
     public void na_koniec(){
+        ile++;
+        if (start==null){
+            start = this;
+            koniec = this;
+            return;
+        }
         koniec.nastepny =this;
         koniec = this;
-        ile++;
     } 
     public int zabierz_start(){
         ile--;

@@ -14,7 +14,7 @@ Lista:
 Dijkstra:
 	javac Dijkstra.java
 uruchom:
-	java Start javatest2.txt 0 32199
+	java Start javatest1.txt 0 32199
 
 czysc:
 	del *.class

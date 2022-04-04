@@ -89,33 +89,38 @@ public class Dijkstra {
                 xdo = startx-x;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj();
+                    new Lista(xdo).na_koniec();;
                 }
             }
             if (graf[startx].DP != -1){
                 xdo = startx+1;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj();
+                    new Lista(xdo).na_koniec();;
                 }
             }
             if (graf[startx].DD != -1){
                 xdo = startx+x;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj();
+                    new Lista(xdo).na_koniec();;
                 }
             }
             if (graf[startx].DL != -1){
                 xdo = startx-1;
                 if (graf[xdo].status==0){
                     graf[xdo].status = 2;
-                    new Lista(xdo).wtasuj();
+                    new Lista(xdo).na_koniec();;
                 }
             }
         }
         if (graf[koniec].status==2){
             wynik = false;
+        }
+        for (int j =0 ;j <xy;j++){
+            if (graf[j].status==2 ){
+                System.out.println(j+" status "+ graf[j].status);
+            }
         }
         for (int i = 0 ;i<xy;i++){
             graf[i].status=0;
