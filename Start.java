@@ -29,6 +29,8 @@ public class Start {
         }*/
         algorymt.okresl_scieszke(szukane);
         new Obraz(x,y,graf);
+        Pisarz generator = new Pisarz("plikawypisany1.txt");
+        generator.napisz(x, y);
 
     }
 }
