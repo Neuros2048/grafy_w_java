@@ -19,6 +19,7 @@ public class Start {
         }
         dane_pliku.wypelnij(graf, x,y);
         Dijkstra algorymt = new Dijkstra(graf, x);
+        Fibonacci algorytm1 = new Fibonacci(graf, x);
         if(algorymt.czy_istnieje(poczontek, szukane, x*y)){
             System.out.println("Nie ma połaczenia miedzy elementami");
             return;
@@ -30,7 +31,7 @@ public class Start {
         algorymt.okresl_scieszke(szukane);
         new Obraz(x,y,graf);
         Pisarz generator = new Pisarz("plikawypisany1.txt");
-        generator.napisz(x, y);
+        //generator.napisz(x, y);
 
     }
 }
