@@ -128,10 +128,6 @@ public class Fibonacci {
         if(this.min.ile !=0){
             //System.out.println(this.min.dziecko.brat1.klucz+" "+this.min.dziecko.klucz+" "+this.min.dziecko.brat2.klucz);
             this.next = min.dziecko;
-            for (int i =0 ;i<this.min.ile;i++){
-                this.next.rodzic=null;
-                this.next = next.brat1;
-            }
             if(this.min.brat1 == this.min){
                 this.min = this.next;
             }else{
@@ -160,36 +156,17 @@ public class Fibonacci {
             //System.out.println(this.min.klucz+" "+this.next.klucz);
             //System.out.println("pentla do whiel");
             tmp = this.next;
+            tmp.rodzic =null;
             this.next = this.next.brat2;
             dodaj_tymczasowa(tmp);
         } while (this.min !=this.next) ;
         this.min = null;
         nowy_min();
 
-        /*
-        this.min = this.next;
-        this.next= this.next.brat1;
-        int i=1;
-        while(this.min !=this.next){
-            this.next = this.next.brat1;
-            i++;
-        }
-        for (int j=0;j<i;j++){
-            if (tymczasowa[this.next.ile]==null){
-                tymczasowa[this.next.ile] = this.next;
-            }else{
-                if ( graf[tymczasowa[this.next.ile].klucz].waga>graf[this.next.klucz].waga ){
-
-                }else{
-
-                }
-            }
-            this.next = this.next.brat1;
-        }*/
-
 
     }
     private void usun_punkt(punkt nowy){
+        //System.out.println("usuwa punkt");
         nowy.rodzic.ile--;
             if (nowy.rodzic.rodzic!=null){
                 if (nowy.rodzic.depresja==true){
@@ -217,23 +194,27 @@ public class Fibonacci {
         }
         dodaj(nowy);
     }
-    private void zmien_wage(punkt nowy){/*
+    private void zmien_wage(punkt nowy){
+        //System.out.println("tak");
         if (nowy==this.min){
             return;
         }
-        else if (nowy.rodzic == null&&graf[this.min.klucz].waga>graf[nowy.klucz].waga){
-            System.out.println("jest");
-            nowy.brat1.brat2 =nowy.brat2;
-            nowy.brat2.brat1 = nowy.brat1;
-            nowy.brat1 = this.min.brat1;
-            nowy.brat2 = this.min;
-            nowy.brat1.brat2 = nowy;
-            this.min.brat1 = nowy;
-            this.min = nowy;
+        else if (nowy.rodzic == null ){
+            if(graf[this.min.klucz].waga>graf[nowy.klucz].waga){
+                //System.out.println("jest");
+                nowy.brat1.brat2 =nowy.brat2;
+                nowy.brat2.brat1 = nowy.brat1;
+                nowy.brat1 = this.min.brat1;
+                nowy.brat2 = this.min;
+                nowy.brat1.brat2 = nowy;
+                this.min.brat1 = nowy;
+                this.min = nowy;
+            }
         }
         else if(graf[nowy.rodzic.klucz].waga>graf[nowy.klucz].waga){
+
             usun_punkt(nowy);
-        }*/
+        }
     }
     public void rozwiarz(int poczontek){
         this.min = this.punkty[poczontek];
@@ -310,7 +291,7 @@ public class Fibonacci {
     private String wypisz_dzieci(punkt nowy){
         String wyraz = "brak dzieci";
         for (int i= 0;i<nowy.ile;i++){
-            wyraz = String.valueOf( nowy.dziecko.klucz);
+            wyraz = String.valueOf( nowy.ile);
         }
         return wyraz;
     }

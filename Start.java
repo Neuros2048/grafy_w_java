@@ -29,6 +29,7 @@ public class Start {
             System.out.println(graf[i].waga);
         }*/
         algorytm.okresl_scieszke(szukane);
+        System.out.println(graf[szukane].waga);
         new Obraz(x,y,graf);
         Pisarz generator = new Pisarz("plikawypisany1.txt");
         //generator.napisz(x, y);

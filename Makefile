@@ -18,7 +18,7 @@ Fibonacci:
 Pisarz:
 	javac Pisarz.java
 uruchom:
-	java Start javatest1.txt 0 32199
+	java Start javatest.txt 0 39199
 
 czysc:
 	del *.class
