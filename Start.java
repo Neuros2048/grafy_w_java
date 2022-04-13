@@ -18,17 +18,17 @@ public class Start {
             graf[i] = new Wieszcholek(i);
         }
         dane_pliku.wypelnij(graf, x,y);
-        Dijkstra algorymt = new Dijkstra(graf, x);
+        Dijkstra algorytm = new Dijkstra(graf, x);
         Fibonacci algorytm1 = new Fibonacci(graf, x);
-        if(algorymt.czy_istnieje(poczontek, szukane, x*y)){
+        if(algorytm.czy_istnieje(poczontek, szukane, x*y)){
             System.out.println("Nie ma połaczenia miedzy elementami");
             return;
         }
-        algorymt.rozwiarz(poczontek);
+        algorytm1.rozwiarz(poczontek);
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);
         }*/
-        algorymt.okresl_scieszke(szukane);
+        algorytm.okresl_scieszke(szukane);
         new Obraz(x,y,graf);
         Pisarz generator = new Pisarz("plikawypisany1.txt");
         //generator.napisz(x, y);

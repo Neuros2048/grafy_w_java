@@ -13,7 +13,7 @@ public class Fibonacci {
         punkt dziecko;
         boolean depresja;
         int ile;
-        int klucz;
+        final int klucz;
         punkt(int klucz){
             this.klucz = klucz;
             this.brat1 = this;
@@ -31,7 +31,7 @@ public class Fibonacci {
         for(int i =0;i< dlugosc;i++){
             this.punkty[i] = new punkt(i);
         }
-        this.tymczasowa = new punkt[1+Math.getExponent(Math.ceil(Math.log10(dlugosc)/Math.log10(2)))];
+        this.tymczasowa = new punkt[dlugosc];//new punkt[1+Math.getExponent(Math.ceil(Math.log10(dlugosc)/Math.log10(2)))];
         for (int i = 0; i< this.tymczasowa.length;i++){
             this.tymczasowa[i] = null;
         }
@@ -39,12 +39,14 @@ public class Fibonacci {
     private void dodaj(punkt nowy){
         if (this.min==null){
             this.min = nowy;
+            nowy.brat1 =nowy;
+            nowy.brat2 =nowy;
             return;
         }
         nowy.brat1 = this.min.brat1;
         nowy.brat2 = this.min;
         nowy.brat1.brat2 = nowy;
-        min.brat1 = nowy;
+        this.min.brat1 = nowy;
         if (this.graf[this.min.klucz].waga>this.graf[nowy.klucz].waga){
             this.min = nowy;
         }
@@ -80,6 +82,8 @@ public class Fibonacci {
             rodzic.ile++;
             rodzic.dziecko = dziecko;
             dziecko.rodzic = rodzic;
+            dziecko.brat1=dziecko;
+            dziecko.brat2 =dziecko;
         }
         else{
             rodzic.ile++;
@@ -90,25 +94,30 @@ public class Fibonacci {
         }
     }
     private void dodaj_tymczasowa(punkt tymczas){
-        if (tymczasowa[tymczas.ile]==null){
-            tymczasowa[tymczas.ile] = tymczas;
+        //System.out.println("start");
+        int w_tablicy = tymczas.ile;
+        if (tymczasowa[w_tablicy]==null){
+            tymczasowa[w_tablicy] = tymczas;
         }else{
-            if ( graf[tymczasowa[tymczas.ile].klucz].waga>graf[tymczas.klucz].waga ){
-                dodaj_dziecko(tymczas, tymczasowa[tymczas.ile]);
-                tymczasowa[tymczas.ile-1]=null;
+            if ( graf[tymczasowa[w_tablicy].klucz].waga>graf[tymczas.klucz].waga ){
+                dodaj_dziecko(tymczas, tymczasowa[w_tablicy]);
+                tymczasowa[w_tablicy]=null;
                 dodaj_tymczasowa(tymczas);
             }else{
-                dodaj_dziecko(tymczasowa[tymczas.ile],tymczas);
-                tymczasowa[tymczas.ile]=null;
-                dodaj_tymczasowa(tymczasowa[tymczas.ile]);
+                dodaj_dziecko(tymczasowa[w_tablicy],tymczas);
+                tymczas =tymczasowa[w_tablicy];
+                
+                tymczasowa[w_tablicy]=null;
+                dodaj_tymczasowa(tymczas);
             }
         }
-        
+        //System.out.println("koniec");
         
     }
     private void nowy_min(){
         for (int i =0;i<tymczasowa.length;i++) {
             if (tymczasowa[i]!=null){
+                //System.out.println("dodaje jako nowy min");
                 dodaj(tymczasowa[i]);
                 tymczasowa[i]=null;
             }
@@ -117,10 +126,14 @@ public class Fibonacci {
     private void zdejmij_min(){
         
         if(this.min.ile !=0){
+            //System.out.println(this.min.dziecko.brat1.klucz+" "+this.min.dziecko.klucz+" "+this.min.dziecko.brat2.klucz);
             this.next = min.dziecko;
+            for (int i =0 ;i<this.min.ile;i++){
+                this.next.rodzic=null;
+                this.next = next.brat1;
+            }
             if(this.min.brat1 == this.min){
                 this.min = this.next;
-                this.min.rodzic = null;
             }else{
                 this.min.brat1.brat2 = this.next;
                 this.min.brat2.brat1 = this.next.brat1;
@@ -133,16 +146,22 @@ public class Fibonacci {
                 this.min = null;
                 return;
             }else{
+                //System.out.println("czy to jak");
                 this.next = this.min.brat1;
                 this.next.brat2 = this.min.brat2;
                 this.next.brat2.brat1 = this.next;
             }
         }
         this.min = this.next;
-
+        punkt tmp;
+        
         do {
-            dodaj_tymczasowa(this.next);
+            //System.out.println(this.next.brat1.klucz+" "+this.next.klucz+" "+this.next.brat2.klucz);
+            //System.out.println(this.min.klucz+" "+this.next.klucz);
+            //System.out.println("pentla do whiel");
+            tmp = this.next;
             this.next = this.next.brat2;
+            dodaj_tymczasowa(tmp);
         } while (this.min !=this.next) ;
         this.min = null;
         nowy_min();
@@ -198,19 +217,23 @@ public class Fibonacci {
         }
         dodaj(nowy);
     }
-    private void zmien_wage(punkt nowy){
+    private void zmien_wage(punkt nowy){/*
         if (nowy==this.min){
             return;
         }
-        else if (nowy.rodzic == null){
-            if (graf[this.min.klucz].waga>graf[nowy.klucz].waga){
-                nowy.brat1.brat2 =nowy.brat2;
-                nowy.brat2.brat1 = nowy.brat1;
-            }
+        else if (nowy.rodzic == null&&graf[this.min.klucz].waga>graf[nowy.klucz].waga){
+            System.out.println("jest");
+            nowy.brat1.brat2 =nowy.brat2;
+            nowy.brat2.brat1 = nowy.brat1;
+            nowy.brat1 = this.min.brat1;
+            nowy.brat2 = this.min;
+            nowy.brat1.brat2 = nowy;
+            this.min.brat1 = nowy;
+            this.min = nowy;
         }
         else if(graf[nowy.rodzic.klucz].waga>graf[nowy.klucz].waga){
             usun_punkt(nowy);
-        }
+        }*/
     }
     public void rozwiarz(int poczontek){
         this.min = this.punkty[poczontek];
@@ -218,8 +241,12 @@ public class Fibonacci {
         int xdo;
         int startx;
         while(wpentli>0){
+            //System.out.println("poczatel");
+            //wypisz_min();
             startx = this.min.klucz;
             zdejmij_min();
+            //wypisz_min();
+            //System.out.println("koniec");
             graf[startx].status = 2;
             if (graf[startx].DG != -1){
                 xdo = startx-x;
@@ -228,6 +255,7 @@ public class Fibonacci {
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DG;
                     dodaj(punkty[xdo]);
+                    wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DG){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DG;
@@ -241,6 +269,7 @@ public class Fibonacci {
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DP;
                     dodaj(punkty[xdo]);
+                    wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DP){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DP;
@@ -254,6 +283,7 @@ public class Fibonacci {
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DD;
                     dodaj(punkty[xdo]);
+                    wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DD){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DD;
@@ -267,6 +297,7 @@ public class Fibonacci {
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DL;
                     dodaj(punkty[xdo]);
+                    wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DL){
                     graf[xdo].x = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DL;
@@ -274,6 +305,31 @@ public class Fibonacci {
                 }
             }
             wpentli--;
+        }
+    }
+    private String wypisz_dzieci(punkt nowy){
+        String wyraz = "brak dzieci";
+        for (int i= 0;i<nowy.ile;i++){
+            wyraz = String.valueOf( nowy.dziecko.klucz);
+        }
+        return wyraz;
+    }
+    private void wypisz_min(){
+        int awaria=0;
+        if (this.min!=null){
+            punkt tmp = this.min;
+            do{
+                System.out.print("("+tmp.brat1.klucz+" "+tmp.klucz+" "+tmp.brat2.klucz+" dzeicko "+wypisz_dzieci(tmp)+")  ");
+                tmp =tmp.brat2;
+                awaria++;
+                if (awaria>5){
+                    System.out.println("awaria");
+                    break;
+                }
+            }while(tmp!=this.min);
+            System.out.println();
+        }else{
+            System.out.println("nic");
         }
     }
 }
