@@ -31,7 +31,10 @@ public class Fibonacci {
         for(int i =0;i< dlugosc;i++){
             this.punkty[i] = new punkt(i);
         }
-        this.tymczasowa = new punkt[dlugosc];//new punkt[1+Math.getExponent(Math.ceil(Math.log10(dlugosc)/Math.log10(2)))];
+        System.out.println(dlugosc);
+        System.out.println(Math.getExponent(dlugosc));
+        System.out.println(Math.getExponent(Math.ceil(Math.log10(dlugosc)/Math.log10(2))));
+        this.tymczasowa = new punkt[1+Math.getExponent(dlugosc)];
         for (int i = 0; i< this.tymczasowa.length;i++){
             this.tymczasowa[i] = null;
         }
