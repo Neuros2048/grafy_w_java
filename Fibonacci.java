@@ -1,7 +1,7 @@
 
 public class Fibonacci {
     private Wieszcholek[] graf;
-    private int x;
+    private int x; //długość wiersza do ruchu po tabeli
     private punkt punkty[];
     private punkt tymczasowa[];
     private punkt min;
@@ -31,7 +31,7 @@ public class Fibonacci {
         for(int i =0;i< dlugosc;i++){
             this.punkty[i] = new punkt(i);
         }
-        this.tymczasowa = new punkt[Math.getExponent(Math.ceil(Math.log10(dlugosc)/Math.log10(2)))];
+        this.tymczasowa = new punkt[1+Math.getExponent(Math.ceil(Math.log10(dlugosc)/Math.log10(2)))];
         for (int i = 0; i< this.tymczasowa.length;i++){
             this.tymczasowa[i] = null;
         }
@@ -48,11 +48,76 @@ public class Fibonacci {
         if (this.graf[this.min.klucz].waga>this.graf[nowy.klucz].waga){
             this.min = nowy;
         }
+        return;
+    }/*
+    private void doda_min(punkt nowy){ //new_min
+        if (this.new_min==null){
+            this.new_min = nowy;
+            nowy.brat2 = null;
+            return;
+        }
+        
+        
+        nowy.brat2 = this.new_min.brat2;
+        this.new_min.brat2 = nowy;
+        
+        return;
+    }
+    private void usun_min(punkt nowy){  //new_min
+        if (new_min ==nowy){
+            new_min =new_min.brat2;
+            return;
+        }
+        punkt tmp = new_min;
+        while(tmp.brat2 !=nowy){
+            tmp = tmp.brat2;
+        }
+        tmp.brat2 = nowy.brat2;
+
+    }*/
+    private void dodaj_dziecko(punkt rodzic,punkt dziecko){
+        if (rodzic.ile==0){
+            rodzic.ile++;
+            rodzic.dziecko = dziecko;
+            dziecko.rodzic = rodzic;
+        }
+        else{
+            rodzic.ile++;
+            dziecko.brat1 = rodzic.dziecko.brat1;
+            dziecko.brat2 =rodzic.dziecko;
+            rodzic.dziecko.brat1.brat2 = dziecko;
+            rodzic.dziecko.brat1 = dziecko; 
+        }
+    }
+    private void dodaj_tymczasowa(punkt tymczas){
+        if (tymczasowa[tymczas.ile]==null){
+            tymczasowa[tymczas.ile] = tymczas;
+        }else{
+            if ( graf[tymczasowa[tymczas.ile].klucz].waga>graf[tymczas.klucz].waga ){
+                dodaj_dziecko(tymczas, tymczasowa[tymczas.ile]);
+                tymczasowa[tymczas.ile-1]=null;
+                dodaj_tymczasowa(tymczas);
+            }else{
+                dodaj_dziecko(tymczasowa[tymczas.ile],tymczas);
+                tymczasowa[tymczas.ile]=null;
+                dodaj_tymczasowa(tymczasowa[tymczas.ile]);
+            }
+        }
+        
         
     }
+    private void nowy_min(){
+        for (int i =0;i<tymczasowa.length;i++) {
+            if (tymczasowa[i]!=null){
+                dodaj(tymczasowa[i]);
+                tymczasowa[i]=null;
+            }
+        }
+    }
     private void zdejmij_min(){
-        this.next = min.dziecko;
+        
         if(this.min.ile !=0){
+            this.next = min.dziecko;
             if(this.min.brat1 == this.min){
                 this.min = this.next;
                 this.min.rodzic = null;
@@ -63,11 +128,151 @@ public class Fibonacci {
                 this.next.brat1 = this.min.brat1;
             }
         }
+        else{
+            if (this.min.brat1 == this.min){
+                this.min = null;
+                return;
+            }else{
+                this.next = this.min.brat1;
+                this.next.brat2 = this.min.brat2;
+                this.next.brat2.brat1 = this.next;
+            }
+        }
+        this.min = this.next;
+
+        do {
+            dodaj_tymczasowa(this.next);
+            this.next = this.next.brat2;
+        } while (this.min !=this.next) ;
+        this.min = null;
+        nowy_min();
+
+        /*
+        this.min = this.next;
+        this.next= this.next.brat1;
+        int i=1;
+        while(this.min !=this.next){
+            this.next = this.next.brat1;
+            i++;
+        }
+        for (int j=0;j<i;j++){
+            if (tymczasowa[this.next.ile]==null){
+                tymczasowa[this.next.ile] = this.next;
+            }else{
+                if ( graf[tymczasowa[this.next.ile].klucz].waga>graf[this.next.klucz].waga ){
+
+                }else{
+
+                }
+            }
+            this.next = this.next.brat1;
+        }*/
+
+
+    }
+    private void usun_punkt(punkt nowy){
+        nowy.rodzic.ile--;
+            if (nowy.rodzic.rodzic!=null){
+                if (nowy.rodzic.depresja==true){
+                    nowy.rodzic.depresja=false;
+                    usun_punkt(nowy.rodzic);
+                }else{
+                    nowy.rodzic.depresja=true;
+                }
+            }
+        if (nowy.rodzic.dziecko==nowy){
+            if(nowy.rodzic.ile==0){
+                nowy.rodzic.dziecko =null;
+            }else{
+                nowy.brat1.brat2=nowy.brat2;
+                nowy.brat2.brat1 =nowy.brat1;
+                nowy.rodzic.dziecko = nowy.brat1;
+            }
+        }
+        else{
+            
+            nowy.brat1.brat2=nowy.brat2;
+            nowy.brat2.brat1 =nowy.brat1;
+            nowy.rodzic = null;
+            
+        }
+        dodaj(nowy);
+    }
+    private void zmien_wage(punkt nowy){
+        if (nowy==this.min){
+            return;
+        }
+        else if (nowy.rodzic == null){
+            if (graf[this.min.klucz].waga>graf[nowy.klucz].waga){
+                nowy.brat1.brat2 =nowy.brat2;
+                nowy.brat2.brat1 = nowy.brat1;
+            }
+        }
+        else if(graf[nowy.rodzic.klucz].waga>graf[nowy.klucz].waga){
+            usun_punkt(nowy);
+        }
     }
     public void rozwiarz(int poczontek){
         this.min = this.punkty[poczontek];
         int wpentli = 1;
+        int xdo;
+        int startx;
         while(wpentli>0){
+            startx = this.min.klucz;
+            zdejmij_min();
+            graf[startx].status = 2;
+            if (graf[startx].DG != -1){
+                xdo = startx-x;
+                if (graf[xdo].status==0){
+                    graf[xdo].x = startx;
+                    graf[xdo].status = 1;
+                    graf[xdo].waga = graf[startx].waga + graf[startx].DG;
+                    dodaj(punkty[xdo]);
+                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DG){
+                    graf[xdo].x = startx;
+                    graf[xdo].waga = graf[startx].waga+graf[startx].DG;
+                    zmien_wage(punkty[xdo]);
+                }
+            }
+            if (graf[startx].DP != -1){
+                xdo = startx+1;
+                if (graf[xdo].status==0){
+                    graf[xdo].x = startx;
+                    graf[xdo].status = 1;
+                    graf[xdo].waga = graf[startx].waga + graf[startx].DP;
+                    dodaj(punkty[xdo]);
+                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DP){
+                    graf[xdo].x = startx;
+                    graf[xdo].waga = graf[startx].waga+graf[startx].DP;
+                    zmien_wage(punkty[xdo]);
+                }
+            }
+            if (graf[startx].DD != -1){
+                xdo = startx+x;
+                if (graf[xdo].status==0){
+                    graf[xdo].x = startx;
+                    graf[xdo].status = 1;
+                    graf[xdo].waga = graf[startx].waga + graf[startx].DD;
+                    dodaj(punkty[xdo]);
+                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DD){
+                    graf[xdo].x = startx;
+                    graf[xdo].waga = graf[startx].waga+graf[startx].DD;
+                    zmien_wage(punkty[xdo]);
+                }
+            }
+            if (graf[startx].DL != -1){
+                xdo = startx-1;
+                if (graf[xdo].status==0){
+                    graf[xdo].x = startx;
+                    graf[xdo].status = 1;
+                    graf[xdo].waga = graf[startx].waga + graf[startx].DL;
+                    dodaj(punkty[xdo]);
+                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DL){
+                    graf[xdo].x = startx;
+                    graf[xdo].waga = graf[startx].waga+graf[startx].DL;
+                    zmien_wage(punkty[xdo]);
+                }
+            }
             wpentli--;
         }
     }
