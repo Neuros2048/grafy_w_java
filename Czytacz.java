@@ -11,7 +11,7 @@ public class Czytacz  {
     Czytacz(File plik) {
         try {
         skan = new Scanner(plik);
-        czytaj = new FileReader(plik);
+        //czytaj = new FileReader(plik);
         } catch(FileNotFoundException e){
             System.out.println("Nie moge otworzyć pliku");
         } 
@@ -19,7 +19,7 @@ public class Czytacz  {
     public int czytaj_int(){
         return skan.nextInt();
     }
-
+    
     public void wypelnij(Wieszcholek[] graf,int x,int y){
         int i;
         int xy =x*y;
