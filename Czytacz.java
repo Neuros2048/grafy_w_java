@@ -19,7 +19,7 @@ public class Czytacz  {
     public int czytaj_int(){
         return skan.nextInt();
     }
-
+    
     public void wypelnij(Wieszcholek[] graf,int x,int y){
         int i;
         int xy =x*y;

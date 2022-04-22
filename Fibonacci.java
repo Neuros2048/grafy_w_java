@@ -5,7 +5,6 @@ public class Fibonacci {
     private punkt punkty[];
     private punkt tymczasowa[];
     private punkt min;
-    private punkt next;
     private class punkt {
         punkt rodzic;
         punkt brat1;
@@ -62,6 +61,7 @@ public class Fibonacci {
         }
         else{
             rodzic.ile++;
+            dziecko.rodzic = rodzic;
             dziecko.brat1 = rodzic.dziecko.brat1;
             dziecko.brat2 =rodzic.dziecko;
             rodzic.dziecko.brat1.brat2 = dziecko;
@@ -96,16 +96,16 @@ public class Fibonacci {
         }
     }
     private void zdejmij_min(){
-        
+        punkt next;
         if(this.min.ile !=0){
-            this.next = min.dziecko;
+            next = min.dziecko;
             if(this.min.brat1 == this.min){
-                this.min = this.next;
+                this.min = next;
             }else{
-                this.min.brat1.brat2 = this.next;
-                this.min.brat2.brat1 = this.next.brat1;
-                this.next.brat1.brat2 = this.min.brat2;
-                this.next.brat1 = this.min.brat1;
+                this.min.brat1.brat2 = next;
+                this.min.brat2.brat1 = next.brat1;
+                next.brat1.brat2 = this.min.brat2;
+                next.brat1 = this.min.brat1;
             }
         }
         else{
@@ -113,20 +113,20 @@ public class Fibonacci {
                 this.min = null;
                 return;
             }else{
-                this.next = this.min.brat1;
-                this.next.brat2 = this.min.brat2;
-                this.next.brat2.brat1 = this.next;
+                next = this.min.brat1;
+                next.brat2 = this.min.brat2;
+                next.brat2.brat1 = next;
             }
         }
-        this.min = this.next;
+        this.min = next;
         punkt tmp;
         
         do {
-            tmp = this.next;
+            tmp = next;
             tmp.rodzic =null;
-            this.next = this.next.brat2;
+            next = next.brat2;
             dodaj_tymczasowa(tmp);
-        } while (this.min !=this.next) ;
+        } while (this.min !=next) ;
         this.min = null;
         nowy_min();
 
@@ -192,13 +192,13 @@ public class Fibonacci {
             if (graf[startx].DG != -1){
                 xdo = startx-x;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DG;
                     dodaj(punkty[xdo]);
                     wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DG){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DG;
                     zmien_wage(punkty[xdo]);
                 }
@@ -206,13 +206,13 @@ public class Fibonacci {
             if (graf[startx].DP != -1){
                 xdo = startx+1;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DP;
                     dodaj(punkty[xdo]);
                     wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DP){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DP;
                     zmien_wage(punkty[xdo]);
                 }
@@ -220,13 +220,13 @@ public class Fibonacci {
             if (graf[startx].DD != -1){
                 xdo = startx+x;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DD;
                     dodaj(punkty[xdo]);
                     wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DD){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DD;
                     zmien_wage(punkty[xdo]);
                 }
@@ -234,13 +234,13 @@ public class Fibonacci {
             if (graf[startx].DL != -1){
                 xdo = startx-1;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DL;
                     dodaj(punkty[xdo]);
                     wpentli++;
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DL){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DL;
                     zmien_wage(punkty[xdo]);
                 }

@@ -1,4 +1,4 @@
-public class Dijkstra {
+public  class Dijkstra {
     Wieszcholek[] graf;
     int x;
     Dijkstra(Wieszcholek[] graf,int x){
@@ -11,19 +11,19 @@ public class Dijkstra {
         int startx;
         int xdo;
         graf[poczontek].waga = 0;
-        graf[poczontek].x = -2;
+        graf[poczontek].z = -2;
         while(przedstawicel.ile_elemntow()>0){
             startx = przedstawicel.zabierz_start();
             graf[startx].status = 2;
             if (graf[startx].DG != -1){
                 xdo = startx-x;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DG;
                     new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DG){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DG;
                     przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
@@ -31,12 +31,12 @@ public class Dijkstra {
             if (graf[startx].DP != -1){
                 xdo = startx+1;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DP;
                     new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DP){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DP;
                     przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
@@ -44,12 +44,12 @@ public class Dijkstra {
             if (graf[startx].DD != -1){
                 xdo = startx+x;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DD;
                     new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DD){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DD;
                     przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
@@ -57,12 +57,12 @@ public class Dijkstra {
             if (graf[startx].DL != -1){
                 xdo = startx-1;
                 if (graf[xdo].status==0){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].status = 1;
                     graf[xdo].waga = graf[startx].waga + graf[startx].DL;
                     new Lista(xdo).wtasuj();
                 }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DL){
-                    graf[xdo].x = startx;
+                    graf[xdo].z = startx;
                     graf[xdo].waga = graf[startx].waga+graf[startx].DL;
                     przedstawicel.znajc_klucz(xdo).przetasuj();
                 }
@@ -72,7 +72,7 @@ public class Dijkstra {
     public void okresl_scieszke(int szukane){
         while(szukane != -2){
             graf[szukane].status = 3;
-            szukane = graf[szukane].x; 
+            szukane = graf[szukane].z; 
         }
     }
     public boolean czy_istnieje(int start,int koniec,int xy){
