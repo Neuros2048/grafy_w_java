@@ -21,12 +21,13 @@ public class Start {
             graf[i] = new Wieszcholek();
         }
         dane_pliku.wypelnij(graf, x,y);
-        Dijkstra algorytm = new Dijkstra(graf, x);
-        Fibonacci algorytm1 = new Fibonacci(graf, x);
-        if(algorytm.czy_istnieje(poczontek, szukane, x*y)){
-            System.out.println("Nie ma połaczenia miedzy elementami");
-            return;
-        }
+        //Dijkstra algorytm = new Dijkstra(graf, x);
+        Dijkstra algorytm1 = new Fibonacci();
+        algorytm1.dodaj_dane(graf, x);
+        //if(algorytm.czy_istnieje(poczontek, szukane, x*y)){
+           // System.out.println("Nie ma połaczenia miedzy elementami");
+           // return;
+        //}
         System.out.println("start");
         Long times = System.currentTimeMillis();
         algorytm1.rozwiarz(poczontek);
@@ -35,7 +36,7 @@ public class Start {
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);
         }*/
-        algorytm.okresl_scieszke(szukane);
+        algorytm1.okresl_scieszke(szukane);
         System.out.println(graf[szukane].waga);
         new Obraz(x,y,graf);
         Pisarz generator = new Pisarz("plikawypisany1.txt");

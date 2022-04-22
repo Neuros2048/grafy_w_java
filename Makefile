@@ -1,4 +1,4 @@
-compiluj: Start Obraz Widok Wieszcholek Czytacz Lista Dijkstra Fibonacci Pisarz uruchom
+compiluj: Start Obraz Widok Wieszcholek Czytacz Kolejka Dijkstra Fibonacci Pisarz uruchom
 Start: 
 	javac Start.java
 Obraz:
@@ -9,8 +9,8 @@ Wieszcholek:
 	javac Wieszcholek.java
 Czytacz:
 	javac Czytacz.java
-Lista:
-	javac Lista.java
+Kolejka:
+	javac Kolejka.java
 Dijkstra:
 	javac Dijkstra.java
 Fibonacci:

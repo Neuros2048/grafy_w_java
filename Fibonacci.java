@@ -1,18 +1,16 @@
 
-public class Fibonacci {
-    private Wieszcholek[] graf;
-    private int x; //długość wiersza do ruchu po tabeli
+public class Fibonacci extends Dijkstra {
     private punkt punkty[];
     private punkt tymczasowa[];
     private punkt min;
     private class punkt {
-        punkt rodzic;
-        punkt brat1;
-        punkt brat2;
-        punkt dziecko;
-        boolean depresja;
-        int ile;
-        final int klucz;
+        private punkt rodzic;
+        private punkt brat1;
+        private punkt brat2;
+        private punkt dziecko;
+        private boolean depresja;
+        private int ile;
+        private final int klucz;
         punkt(int klucz){
             this.klucz = klucz;
             this.brat1 = this;
@@ -20,19 +18,6 @@ public class Fibonacci {
             this.ile = 0;
             this.depresja = false;
             this.rodzic = null;
-        }
-    }
-    Fibonacci(Wieszcholek[] graf,int x){
-        this.graf = graf;
-        this.x = x;
-        int dlugosc = graf.length;
-        this.punkty = new punkt[dlugosc];
-        for(int i =0;i< dlugosc;i++){
-            this.punkty[i] = new punkt(i);
-        }
-        this.tymczasowa = new punkt[1+Math.getExponent(dlugosc)];
-        for (int i = 0; i< this.tymczasowa.length;i++){
-            this.tymczasowa[i] = null;
         }
     }
     private void dodaj(punkt nowy){
@@ -95,43 +80,6 @@ public class Fibonacci {
             }
         }
     }
-    private void zdejmij_min(){
-        punkt next;
-        if(this.min.ile !=0){
-            next = min.dziecko;
-            if(this.min.brat1 == this.min){
-                this.min = next;
-            }else{
-                this.min.brat1.brat2 = next;
-                this.min.brat2.brat1 = next.brat1;
-                next.brat1.brat2 = this.min.brat2;
-                next.brat1 = this.min.brat1;
-            }
-        }
-        else{
-            if (this.min.brat1 == this.min){
-                this.min = null;
-                return;
-            }else{
-                next = this.min.brat1;
-                next.brat2 = this.min.brat2;
-                next.brat2.brat1 = next;
-            }
-        }
-        this.min = next;
-        punkt tmp;
-        
-        do {
-            tmp = next;
-            tmp.rodzic =null;
-            next = next.brat2;
-            dodaj_tymczasowa(tmp);
-        } while (this.min !=next) ;
-        this.min = null;
-        nowy_min();
-
-
-    }
     private void usun_punkt(punkt nowy){
         nowy.rodzic.ile--;
             if (nowy.rodzic.rodzic!=null){
@@ -180,73 +128,73 @@ public class Fibonacci {
             usun_punkt(nowy);
         }
     }
-    public void rozwiarz(int poczontek){
-        this.min = this.punkty[poczontek];
-        int wpentli = 1;
-        int xdo;
-        int startx;
-        while(wpentli>0){
-            startx = this.min.klucz;
-            zdejmij_min();
-            graf[startx].status = 2;
-            if (graf[startx].DG != -1){
-                xdo = startx-x;
-                if (graf[xdo].status==0){
-                    graf[xdo].z = startx;
-                    graf[xdo].status = 1;
-                    graf[xdo].waga = graf[startx].waga + graf[startx].DG;
-                    dodaj(punkty[xdo]);
-                    wpentli++;
-                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DG){
-                    graf[xdo].z = startx;
-                    graf[xdo].waga = graf[startx].waga+graf[startx].DG;
-                    zmien_wage(punkty[xdo]);
-                }
-            }
-            if (graf[startx].DP != -1){
-                xdo = startx+1;
-                if (graf[xdo].status==0){
-                    graf[xdo].z = startx;
-                    graf[xdo].status = 1;
-                    graf[xdo].waga = graf[startx].waga + graf[startx].DP;
-                    dodaj(punkty[xdo]);
-                    wpentli++;
-                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DP){
-                    graf[xdo].z = startx;
-                    graf[xdo].waga = graf[startx].waga+graf[startx].DP;
-                    zmien_wage(punkty[xdo]);
-                }
-            }
-            if (graf[startx].DD != -1){
-                xdo = startx+x;
-                if (graf[xdo].status==0){
-                    graf[xdo].z = startx;
-                    graf[xdo].status = 1;
-                    graf[xdo].waga = graf[startx].waga + graf[startx].DD;
-                    dodaj(punkty[xdo]);
-                    wpentli++;
-                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DD){
-                    graf[xdo].z = startx;
-                    graf[xdo].waga = graf[startx].waga+graf[startx].DD;
-                    zmien_wage(punkty[xdo]);
-                }
-            }
-            if (graf[startx].DL != -1){
-                xdo = startx-1;
-                if (graf[xdo].status==0){
-                    graf[xdo].z = startx;
-                    graf[xdo].status = 1;
-                    graf[xdo].waga = graf[startx].waga + graf[startx].DL;
-                    dodaj(punkty[xdo]);
-                    wpentli++;
-                }else if(graf[xdo].status==1&&graf[xdo].waga>graf[startx].waga+graf[startx].DL){
-                    graf[xdo].z = startx;
-                    graf[xdo].waga = graf[startx].waga+graf[startx].DL;
-                    zmien_wage(punkty[xdo]);
-                }
-            }
-            wpentli--;
+    @Override
+    protected void dodaj_dane(Wieszcholek[] graf, int x) {
+        this.graf = graf;
+        this.x = x;
+        int dlugosc = graf.length;
+        this.punkty = new punkt[dlugosc];
+        for(int i =0;i< dlugosc;i++){
+            this.punkty[i] = new punkt(i);
         }
+        this.tymczasowa = new punkt[1+Math.getExponent(dlugosc)];
+        for (int i = 0; i< this.tymczasowa.length;i++){
+            this.tymczasowa[i] = null;
+        }
+    }
+    @Override
+    protected int get_min() {
+        return this.min.klucz;
+    }
+    @Override
+    protected void zdejmij_min() {
+        punkt next;
+        if(this.min.ile !=0){
+            next = min.dziecko;
+            if(this.min.brat1 == this.min){
+                this.min = next;
+            }else{
+                this.min.brat1.brat2 = next;
+                this.min.brat2.brat1 = next.brat1;
+                next.brat1.brat2 = this.min.brat2;
+                next.brat1 = this.min.brat1;
+            }
+        }
+        else{
+            if (this.min.brat1 == this.min){
+                this.min = null;
+                return;
+            }else{
+                next = this.min.brat1;
+                next.brat2 = this.min.brat2;
+                next.brat2.brat1 = next;
+            }
+        }
+        this.min = next;
+        punkt tmp;
+        
+        do {
+            tmp = next;
+            tmp.rodzic =null;
+            next = next.brat2;
+            dodaj_tymczasowa(tmp);
+        } while (this.min !=next) ;
+        this.min = null;
+        nowy_min();
+
+    }
+    @Override
+    protected void zmien_wage(int xdo) {
+        zmien_wage(this.punkty[xdo]);
+        
+    }
+    @Override
+    protected void dodaj(int xdo) {
+        dodaj(this.punkty[xdo]);
+    }
+    @Override
+    protected void stworzenie(int poczontek) {
+        this.min = this.punkty[poczontek];
     }
     
 }
