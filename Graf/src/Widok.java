@@ -1,10 +1,13 @@
 //import javax.swing.*;
-//import java.awt.*;
-//import javax.swing.plaf.DimensionUIResource;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import javax.swing.plaf.DimensionUIResource;
+
+import javafx.scene.image.Image;
 
 
 public class Widok { //extends JPanel{
-    /*
+    
     int x;
     int y;
     int rozmiarx;
@@ -15,6 +18,7 @@ public class Widok { //extends JPanel{
     double max; //max całkowitej drogi
     double maxw; // max pojedycznej drogi
     double minw; // min pojedynczej drogi
+    BufferedImage obrazek;
     Wieszcholek[] graf;
     Widok(int x,int y,Wieszcholek[] graf,int Dx,int Dy){
         this.graf = graf;
@@ -26,8 +30,12 @@ public class Widok { //extends JPanel{
         najwieksze(graf);
         this.Dx =Dx;
         this.Dy=Dy;
-        
-        this.setPreferredSize(new DimensionUIResource(Dx, Dy));
+        this.obrazek = new BufferedImage(Dx,Dy,BufferedImage.TYPE_INT_RGB );
+        Graphics2D  g2D = this.obrazek.createGraphics();
+        paint(g2D);
+    }
+    public BufferedImage pomalowane(){
+        return obrazek;
     }
     private void najwieksze(Wieszcholek[] graf){
         int i;
@@ -131,11 +139,10 @@ public class Widok { //extends JPanel{
         }
         return new Color(r,g,b);
     }
-    public void paint(Graphics g){  //sama sie urzywa
+    public void paint(Graphics2D g2D){  //sama sie urzywa
         int i,ii;
-        Graphics2D g2D = (Graphics2D) g; // więcej popcji graficznych
-        g.setColor(Color.black);
-        g.fillRect(0, 0, Dx, Dy);
+        g2D.setColor(Color.black);
+        g2D.fillRect(0, 0, Dx, Dy);
         g2D.scale((double)Dx/rozmiarx/x/3*2, (double)Dy/rozmiary/y/3*2);
         int pozycja_x;
         int pozycja_y;
@@ -192,5 +199,5 @@ public class Widok { //extends JPanel{
                 
             }
         }
-    }*/
+    }
 }

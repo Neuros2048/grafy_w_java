@@ -18,9 +18,9 @@ public class Start1 extends Application {
     public static void main(String[] args) {
         //Pisarz generator = new Pisarz("/Pliki_textowe/plikawy21pisany1.txt");
         //generator.napisz(32, 2);
-        launch(args);
+        
         String [] dane_wejsciowe=new String[3];
-        dane_wejsciowe[0]="javatest.txt";
+        dane_wejsciowe[0]="Graf/Pliki_textowe/javatest.txt";
         dane_wejsciowe[1]="10000";
         dane_wejsciowe[2]="7000";
         int poczontek = Integer.parseInt(dane_wejsciowe[1]);
@@ -59,7 +59,8 @@ public class Start1 extends Application {
         //new Obraz(x,y,graf);
         //Pisarz generator = new Pisarz("plikawypisany1.txt");
         //generator.napisz(x, y);
-
+        Widok wynik =  new Widok(x, y, graf, 1600, 1000);
+        launch(args);
     }
     
     @Override

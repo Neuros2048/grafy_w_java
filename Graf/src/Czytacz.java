@@ -10,6 +10,7 @@ public class Czytacz  {
     FileReader czytaj;
     Czytacz(File plik) {
         try {
+        
         skan = new Scanner(plik);
         //czytaj = new FileReader(plik);
         } catch(FileNotFoundException e){
