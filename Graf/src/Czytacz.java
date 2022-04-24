@@ -8,14 +8,9 @@ public class Czytacz  {
     Scanner skan;
     Scanner skanlini;
     FileReader czytaj;
-    Czytacz(File plik) {
-        try {
-        
-        skan = new Scanner(plik);
-        //czytaj = new FileReader(plik);
-        } catch(FileNotFoundException e){
-            System.out.println("Nie moge otworzyć pliku");
-        } 
+    Czytacz(Scanner skan) {
+        this.skan = skan;
+
     }
     public int czytaj_int(){
         return skan.nextInt();
