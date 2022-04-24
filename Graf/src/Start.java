@@ -1,13 +1,15 @@
 import java.io.File;
-import java.sql.Time;
-import java.util.Timer;
-
 
 public class Start {
     public static void main(String[] args) {
-        int poczontek = Integer.parseInt(args[1]);
-        int szukane = Integer.parseInt(args[2]);
-        Czytacz dane_pliku = new Czytacz(new File(args[0]));
+        
+        String [] dane_wejsciowe=new String[3];
+        dane_wejsciowe[0]="Pliki textowe/javatest.txt";
+        dane_wejsciowe[1]="10000";
+        dane_wejsciowe[2]="7000";
+        int poczontek = Integer.parseInt(dane_wejsciowe[1]);
+        int szukane = Integer.parseInt(dane_wejsciowe[2]);
+        Czytacz dane_pliku = new Czytacz(new File(dane_wejsciowe[0]));
         //Czytacz dane_pliku = new Czytacz(new File("mygraph.txt"));
         int x,y;
         
@@ -39,7 +41,7 @@ public class Start {
         algorytm1.okresl_scieszke(szukane);
         System.out.println(graf[szukane].waga);
         new Obraz(x,y,graf);
-        Pisarz generator = new Pisarz("plikawypisany1.txt");
+        //Pisarz generator = new Pisarz("plikawypisany1.txt");
         //generator.napisz(x, y);
 
     }

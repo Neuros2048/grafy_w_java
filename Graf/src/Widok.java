@@ -15,7 +15,7 @@ public class Widok  extends JPanel{
     double maxw; // max pojedycznej drogi
     double minw; // min pojedynczej drogi
     Wieszcholek[] graf;
-    Widok(int x,int y,Wieszcholek[] graf){
+    Widok(int x,int y,Wieszcholek[] graf,int Dx,int Dy){
         this.graf = graf;
         this.x =x;
         this.y = y;
@@ -23,11 +23,10 @@ public class Widok  extends JPanel{
         rozmiary = 8;
         skala = 1;
         najwieksze(graf);
-        Dimension Wymiary_ekranu = Toolkit.getDefaultToolkit().getScreenSize(); // Bierze wymiary ekranu.
-        Dy = Wymiary_ekranu.height/10 *9;
-        Dx =  Wymiary_ekranu.width/10 * 9;
-        this.setPreferredSize(new DimensionUIResource(Dx, Dy));
+        this.Dx =Dx;
+        this.Dy=Dy;
         
+        this.setPreferredSize(new DimensionUIResource(Dx, Dy));
     }
     private void najwieksze(Wieszcholek[] graf){
         int i;
