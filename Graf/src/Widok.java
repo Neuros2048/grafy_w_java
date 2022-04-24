@@ -1,9 +1,10 @@
-import javax.swing.*;
-import java.awt.*;
-import javax.swing.plaf.DimensionUIResource;
+//import javax.swing.*;
+//import java.awt.*;
+//import javax.swing.plaf.DimensionUIResource;
 
 
-public class Widok  extends JPanel{
+public class Widok { //extends JPanel{
+    /*
     int x;
     int y;
     int rozmiarx;
@@ -191,5 +192,5 @@ public class Widok  extends JPanel{
                 
             }
         }
-    }
+    }*/
 }

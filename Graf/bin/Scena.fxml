@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="1027.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Scena">
+   <children>
+      <Button layoutX="614.0" layoutY="157.0" mnemonicParsing="false" onAction="#minus" text="-" />
+      <Button layoutX="614.0" layoutY="132.0" mnemonicParsing="false" onAction="#plus" text="+" />
+      <TextField fx:id="zawartosc" layoutX="376.0" layoutY="51.0" promptText="zaousz nbue=" />
+      <Button layoutX="799.0" layoutY="242.0" mnemonicParsing="false" onAction="#wcisnienty" text="wypisztesks" />
+      <ScrollPane fx:id="pole" layoutY="132.0" prefHeight="474.0" prefWidth="614.0" scaleShape="false">
+         <content>
+            <ImageView fx:id="obraz" fitHeight="329.0" fitWidth="402.0" pickOnBounds="true" preserveRatio="true" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

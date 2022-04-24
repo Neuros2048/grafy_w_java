@@ -1,0 +1,37 @@
+{
+    // Użyj funkcji IntelliSense, aby uzyskać informacje o możliwych atrybutach.
+    // Najedź kursorem, aby wyświetlić opisy istniejących atrybutów.
+    // Aby uzyskać więcej informacji, odwiedź stronę: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    
+        {
+            "type": "java",
+            "name": "Launch Uruchom",
+            "request": "launch",
+            "mainClass": "Uruchom",
+            "projectName": "grafy_w_java_8713defb"
+        },
+        {
+            "type": "java",
+            "name": "Launch Start",
+            "request": "launch",
+            "mainClass": "Start",
+            "projectName": "grafy_w_java_8713defb"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Start1",
+            "request": "launch",
+            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-18.0.1/lib\" --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "Start1",
+            "projectName": "grafy_w_java_8713defb"
+        }
+    ]
+}

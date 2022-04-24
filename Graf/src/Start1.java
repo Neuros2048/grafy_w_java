@@ -1,10 +1,26 @@
-import java.io.File;
 
-public class Start {
+import java.io.File;
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+import javafx.event.EventHandler;
+
+public class Start1 extends Application {
     public static void main(String[] args) {
-        
+        //Pisarz generator = new Pisarz("/Pliki_textowe/plikawy21pisany1.txt");
+        //generator.napisz(32, 2);
+        launch(args);
         String [] dane_wejsciowe=new String[3];
-        dane_wejsciowe[0]="Pliki textowe/javatest.txt";
+        dane_wejsciowe[0]="javatest.txt";
         dane_wejsciowe[1]="10000";
         dane_wejsciowe[2]="7000";
         int poczontek = Integer.parseInt(dane_wejsciowe[1]);
@@ -40,9 +56,28 @@ public class Start {
         }*/
         algorytm1.okresl_scieszke(szukane);
         System.out.println(graf[szukane].waga);
-        new Obraz(x,y,graf);
+        //new Obraz(x,y,graf);
         //Pisarz generator = new Pisarz("plikawypisany1.txt");
         //generator.napisz(x, y);
 
     }
+    
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+        Parent root = null;
+        root = FXMLLoader.load(getClass().getResource("Scena.fxml"));
+        if (root==null){
+            System.out.println("mnie działa");
+        }else{
+            System.out.println("niby działa");
+        }
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+        }catch(IOException e){
+            System.out.println("błąd");
+        }
+    }
+    
 }

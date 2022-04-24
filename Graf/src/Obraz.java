@@ -1,6 +1,7 @@
-import java.awt.*;
-import javax.swing.*;
-public class Obraz extends JFrame {
+//import java.awt.*;
+//import javax.swing.*;
+public class Obraz {//extends JFrame {
+    /*
     Widok panel;
     Obraz(int x,int y,Wieszcholek[] graf){
         Dimension Wymiary_ekranu = Toolkit.getDefaultToolkit().getScreenSize(); // Bierze wymiary ekranu.
@@ -24,6 +25,6 @@ public class Obraz extends JFrame {
        // this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-    }
+    }*/
     
 }
