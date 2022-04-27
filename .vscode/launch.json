@@ -5,20 +5,7 @@
     "version": "0.2.0",
     "configurations": [
     
-        {
-            "type": "java",
-            "name": "Launch Uruchom",
-            "request": "launch",
-            "mainClass": "Uruchom",
-            "projectName": "grafy_w_java_8713defb"
-        },
-        {
-            "type": "java",
-            "name": "Launch Start",
-            "request": "launch",
-            "mainClass": "Start",
-            "projectName": "grafy_w_java_8713defb"
-        },
+        
         {
             "type": "java",
             "name": "Launch Current File",
