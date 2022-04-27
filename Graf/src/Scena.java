@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 public class Scena {
     double Scala = 1;
@@ -22,6 +23,9 @@ public class Scena {
     double Fitszetokosc;
     int algorytm;
     Scanner skan;
+    @FXML
+    private GridPane Calosc;
+
     @FXML
     private ResourceBundle resources;
 
@@ -55,7 +59,6 @@ public class Scena {
     void minus(ActionEvent event) {
         if (Scala>0.3){
             Scala-=0.2;
-            System.out.println(obraz.getFitHeight());
             obraz.setFitHeight(Fitwysokosc*Scala);
             obraz.setFitWidth(Fitszetokosc*Scala);
         }
@@ -64,7 +67,6 @@ public class Scena {
     @FXML
     void plus(ActionEvent event) {
         Scala+=0.2;
-        System.out.println(obraz.getFitHeight());
         obraz.setFitHeight(Fitwysokosc*Scala);
         obraz.setFitWidth(Fitszetokosc*Scala);
     }
@@ -81,7 +83,7 @@ public class Scena {
     }
     @FXML
     void wcisnienty(ActionEvent event) {
-        
+
         try {
             Scanner skan = new Scanner(new File("Graf/Pliki_textowe/"+zawartosc.getText()));
             Komunikator.setText("Udało się odczytać plik");
@@ -125,22 +127,24 @@ public class Scena {
            // System.out.println("Nie ma połaczenia miedzy elementami");
            // return;
         //}
-        System.out.println("start");
-        Long times = System.currentTimeMillis();
         algorytm1.rozwiarz(poczontek);
-        Long timek = System.currentTimeMillis() - times;
-        System.out.println(timek);
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);
         }*/
         algorytm1.okresl_scieszke(szukane);
-        System.out.println(graf[szukane].waga);
         //new Obraz(x,y,graf);
         //Pisarz generator = new Pisarz("plikawypisany1.txt");
         //generator.napisz(x, y);
-        int Dx=16000;
-        int Dy=10000;
-        Widok wynik =  new Widok(x, y, graf, Dx, Dy);
+        int rozmiar = 8;
+        int Dx= (int) Math.round(pole.getWidth());
+        int Dy= (int) Math.round(pole.getHeight());
+        if (Dx < rozmiar*x*3/2){
+            Dx = rozmiar*x*3/2;
+        }
+        if (Dy < rozmiar*x*3/2){
+            Dy = rozmiar*x*3/2;
+        }
+        Widok wynik =  new Widok(x, y, graf, Dx, Dy,rozmiar);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setFitHeight(Dx);
         obraz.setFitWidth(Dy);

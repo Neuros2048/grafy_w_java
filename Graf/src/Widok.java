@@ -10,8 +10,7 @@ public class Widok { //extends JPanel{
     
     int x;
     int y;
-    int rozmiarx;
-    int rozmiary;
+    int rozmiar;
     int skala;// odwortność, jak rośnie to maleje wszytko
     int Dx;
     int Dy;
@@ -20,17 +19,16 @@ public class Widok { //extends JPanel{
     double minw; // min pojedynczej drogi
     BufferedImage obrazek;
     Wieszcholek[] graf;
-    Widok(int x,int y,Wieszcholek[] graf,int Dx,int Dy){
+    Widok(int x,int y,Wieszcholek[] graf,int Dx,int Dy,int rozmiar){
         this.graf = graf;
         this.x =x;
         this.y = y;
-        rozmiarx = 8;
-        rozmiary = 8;
+        this.rozmiar = rozmiar;
         skala = 1;
         najwieksze(graf);
-        this.Dx =Dx;
-        this.Dy=Dy;
-        this.obrazek = new BufferedImage(Dx,Dy,BufferedImage.TYPE_INT_RGB );
+        this.Dx = Dx  ;
+        this.Dy = Dy;
+        this.obrazek = new BufferedImage(this.Dx,this.Dy,BufferedImage.TYPE_INT_RGB );
         Graphics2D  g2D = this.obrazek.createGraphics();
         paint(g2D);
     }
@@ -143,30 +141,30 @@ public class Widok { //extends JPanel{
         int i,ii;
         g2D.setColor(Color.black);
         g2D.fillRect(0, 0, Dx, Dy);
-        g2D.scale((double)Dx/rozmiarx/x/3*2, (double)Dy/rozmiary/y/3*2);
+        g2D.scale((double)Dx/rozmiar/x/3*2, (double)Dy/rozmiar/y/3*2);
         int pozycja_x;
         int pozycja_y;
         int iixi;
         g2D.setStroke(new BasicStroke(1));
         for (i =0 ;i<y;i++){
             for (ii = 0;ii<x;ii++){
-                pozycja_x = rozmiarx/8 + ii*rozmiarx/2*3;
-                pozycja_y = rozmiary/8 + i*rozmiary/2*3;
+                pozycja_x = rozmiar/8 + ii*rozmiar/2*3;
+                pozycja_y = rozmiar/8 + i*rozmiar/2*3;
 
                 iixi = ii+i*x;
                 if (graf[iixi].DP != -1){
                     g2D.setColor(tecza(graf[iixi].DP,graf[iixi+1].DL));   
-                    g2D.drawLine(pozycja_x + rozmiarx, pozycja_y + rozmiary/2 , pozycja_x + rozmiarx/2*3 , pozycja_y+rozmiary/2);
+                    g2D.drawLine(pozycja_x + rozmiar, pozycja_y + rozmiar/2 , pozycja_x + rozmiar/2*3 , pozycja_y+rozmiar/2);
                 }
                 if (graf[iixi].DD != -1){ 
                     g2D.setColor(tecza(graf[iixi].DD,graf[ii+(i+1)*x].DG));
-                    g2D.drawLine(pozycja_x + rozmiarx/2, pozycja_y + rozmiary, pozycja_x + rozmiarx/2 , pozycja_y+rozmiary/2*3);
+                    g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar, pozycja_x + rozmiar/2 , pozycja_y+rozmiar/2*3);
                 }
                 if (graf[iixi].DG==-1&&graf[iixi].DP==-1&&graf[iixi].DD==-1&&graf[iixi].DL==-1){
                     //tak na oko to szybciej powinno dziłać
                 }else {
                     g2D.setColor(tecza(graf[iixi].waga));
-                    g2D.fillOval(pozycja_x,pozycja_y, rozmiarx, rozmiary);
+                    g2D.fillOval(pozycja_x,pozycja_y, rozmiar, rozmiar);
                 }
                 
             }
@@ -175,17 +173,17 @@ public class Widok { //extends JPanel{
         g2D.setColor(Color.white);
         for (i =0 ;i<y;i++){
             for (ii = 0;ii<x;ii++){
-                pozycja_x = rozmiarx/8 + ii*rozmiarx/2*3;
-                pozycja_y = rozmiary/8 + i*rozmiary/2*3;
+                pozycja_x = rozmiar/8 + ii*rozmiar/2*3;
+                pozycja_y = rozmiar/8 + i*rozmiar/2*3;
                 if (graf[ii+i*x].status==3){
                     if (graf[ii+i*x].z== ii+i*x -1 ){   
-                        g2D.drawLine(pozycja_x+rozmiarx/2, pozycja_y + rozmiary/2 , pozycja_x - rozmiarx, pozycja_y+rozmiary/2);
+                        g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x - rozmiar, pozycja_y+rozmiar/2);
                     }else if (graf[ii+i*x].z== ii+i*x +1 ){   
-                        g2D.drawLine(pozycja_x+rozmiarx/2, pozycja_y + rozmiary/2 , pozycja_x + rozmiarx*2 , pozycja_y+rozmiary/2);
+                        g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x + rozmiar*2 , pozycja_y+rozmiar/2);
                     }else if (graf[ii+i*x].z== ii+(i-1)*x){  
-                        g2D.drawLine(pozycja_x + rozmiarx/2, pozycja_y + rozmiary/2, pozycja_x + rozmiarx/2 , pozycja_y - rozmiary);
+                        g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y - rozmiar);
                     }else if (graf[ii+i*x].z== ii+(i+1)*x ){   
-                        g2D.drawLine(pozycja_x + rozmiarx/2, pozycja_y + rozmiary/2, pozycja_x + rozmiarx/2 , pozycja_y + rozmiary*2);
+                        g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y + rozmiar*2);
                     }
                 }
                 
@@ -194,8 +192,8 @@ public class Widok { //extends JPanel{
         }
         for (i =0 ;i<y;i++){
             for (ii = 0;ii<x;ii++){
-                pozycja_x = rozmiarx/8 + ii*rozmiarx/2*3;
-                pozycja_y = rozmiary/8 + i*rozmiary/2*3;
+                pozycja_x = rozmiar/8 + ii*rozmiar/2*3;
+                pozycja_y = rozmiar/8 + i*rozmiar/2*3;
                 
             }
         }
