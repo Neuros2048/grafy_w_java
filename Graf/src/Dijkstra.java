@@ -1,7 +1,7 @@
 public abstract class Dijkstra {
     Wieszcholek[] graf;
     int x;
-    protected abstract void dodaj_dane(Wieszcholek[] graf,int x ); //może do zamiany na konstruktor
+    protected abstract void dodaj_dane(Wieszcholek[] graf,int x ); 
     protected abstract int get_min();
     protected abstract void zdejmij_min();
     protected abstract void zmien_wage(int xdo);

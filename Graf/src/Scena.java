@@ -7,6 +7,7 @@ import java.util.Scanner;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -15,7 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class Scena {
     double Scala = 1;
@@ -23,6 +27,8 @@ public class Scena {
     double Fitszetokosc;
     int algorytm;
     Scanner skan;
+    @FXML
+    private Pane Plansza;
     @FXML
     private GridPane Calosc;
 
@@ -42,7 +48,7 @@ public class Scena {
 
     @FXML
     private Button Startdij;
-
+    
     
     @FXML
     private TextField do_kond;
@@ -56,17 +62,27 @@ public class Scena {
     @FXML
     private TextField z_kond;
     @FXML
+    void clikniencie(MouseEvent event) {
+        System.out.println(event.getX());
+        System.out.println( event.getY());
+        System.out.println("jestes we mnie");
+    }
+    @FXML
     void minus(ActionEvent event) {
         if (Scala>0.3){
             Scala-=0.2;
             obraz.setFitHeight(Fitwysokosc*Scala);
             obraz.setFitWidth(Fitszetokosc*Scala);
+            Plansza.setMaxSize(Fitwysokosc*Scala, Fitszetokosc*Scala);
+            Plansza.setMinSize(Fitwysokosc*Scala,Fitszetokosc*Scala);
         }
     }
 
     @FXML
     void plus(ActionEvent event) {
         Scala+=0.2;
+        Plansza.setMaxSize(Fitwysokosc*Scala, Fitszetokosc*Scala);
+        Plansza.setMinSize(Fitwysokosc*Scala,Fitszetokosc*Scala);
         obraz.setFitHeight(Fitwysokosc*Scala);
         obraz.setFitWidth(Fitszetokosc*Scala);
     }
@@ -148,6 +164,8 @@ public class Scena {
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setFitHeight(Dx);
         obraz.setFitWidth(Dy);
+        Plansza.setMaxSize(Dx, Dy);
+        Plansza.setMinSize(Dx, Dy);
         obraz.setImage( toczos);
         Fitwysokosc = obraz.getFitHeight();
         Fitszetokosc = obraz.getFitWidth();
