@@ -27,6 +27,9 @@ public class Scena {
     double Fitszetokosc;
     int algorytm;
     Scanner skan;
+    int x,y;
+    Widok wynik;
+    Dijkstra algorytm1;
     @FXML
     private Pane Plansza;
     @FXML
@@ -65,7 +68,12 @@ public class Scena {
     void clikniencie(MouseEvent event) {
         System.out.println(event.getX());
         System.out.println( event.getY());
+        znajdz_wieszcholek(event.getX(), event.getY());
+        Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
+        obraz.setImage(toczos);
+
         System.out.println("jestes we mnie");
+
     }
     @FXML
     void minus(ActionEvent event) {
@@ -73,16 +81,16 @@ public class Scena {
             Scala-=0.2;
             obraz.setFitHeight(Fitwysokosc*Scala);
             obraz.setFitWidth(Fitszetokosc*Scala);
-            Plansza.setMaxSize(Fitwysokosc*Scala, Fitszetokosc*Scala);
-            Plansza.setMinSize(Fitwysokosc*Scala,Fitszetokosc*Scala);
+            Plansza.setMaxSize( Fitszetokosc*Scala,Fitwysokosc*Scala);
+            Plansza.setMinSize(Fitszetokosc*Scala,Fitwysokosc*Scala);
         }
     }
 
     @FXML
     void plus(ActionEvent event) {
         Scala+=0.2;
-        Plansza.setMaxSize(Fitwysokosc*Scala, Fitszetokosc*Scala);
-        Plansza.setMinSize(Fitwysokosc*Scala,Fitszetokosc*Scala);
+        Plansza.setMaxSize(Fitszetokosc*Scala,Fitwysokosc*Scala);
+        Plansza.setMinSize(Fitszetokosc*Scala,Fitwysokosc*Scala);
         obraz.setFitHeight(Fitwysokosc*Scala);
         obraz.setFitWidth(Fitszetokosc*Scala);
     }
@@ -111,6 +119,16 @@ public class Scena {
         }
 
     }
+    private void znajdz_wieszcholek(double x,double y){
+        int pozycja_x;
+        int pozycja_y;
+        pozycja_x = (int) Math.floor(x/(this.Fitszetokosc*this.Scala/this.x));
+        pozycja_y = (int) Math.floor(y/(this.Fitwysokosc*this.Scala/this.y));
+        algorytm1.okresl_scieszke(pozycja_x+pozycja_y*this.x);
+        this.wynik.pomaluj_wynik();
+        System.out.println(pozycja_x+"    "+pozycja_y);
+        return ;
+    }
     @FXML
     void Startdij(ActionEvent event) {
 
@@ -118,11 +136,11 @@ public class Scena {
         int poczontek = Integer.parseInt(z_kond.getText());
         int szukane = Integer.parseInt(do_kond.getText());
         Czytacz dane_pliku = new Czytacz(skan);
-        int x,y;
         
-        y = dane_pliku.czytaj_int();
-        x = dane_pliku.czytaj_int();
-        System.out.println(y +" i "+ x);
+        
+        this.y = dane_pliku.czytaj_int();
+        this.x = dane_pliku.czytaj_int();
+        System.out.println(this.y +" i "+ this.x);
         Wieszcholek[] graf = new Wieszcholek[x*y];
         
         int i;
@@ -131,7 +149,6 @@ public class Scena {
         }
         dane_pliku.wypelnij(graf, x,y);
         //Dijkstra algorytm = new Dijkstra(graf, x);
-        Dijkstra algorytm1;
         if (algorytm == 0){
             algorytm1 = new Fibonacci();
         }else{
@@ -147,7 +164,7 @@ public class Scena {
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);
         }*/
-        algorytm1.okresl_scieszke(szukane);
+        //algorytm1.okresl_scieszke(szukane);
         //new Obraz(x,y,graf);
         //Pisarz generator = new Pisarz("plikawypisany1.txt");
         //generator.napisz(x, y);
@@ -157,16 +174,17 @@ public class Scena {
         if (Dx < rozmiar*x*3/2){
             Dx = rozmiar*x*3/2;
         }
-        if (Dy < rozmiar*x*3/2){
-            Dy = rozmiar*x*3/2;
+        if (Dy < rozmiar*y*3/2){
+            Dy = rozmiar*y*3/2;
         }
-        Widok wynik =  new Widok(x, y, graf, Dx, Dy,rozmiar);
+        wynik =  new Widok(x, y, graf, Dx, Dy,rozmiar);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
-        obraz.setFitHeight(Dx);
-        obraz.setFitWidth(Dy);
+        obraz.setFitHeight(Dy);
+        obraz.setFitWidth(Dx);
         Plansza.setMaxSize(Dx, Dy);
         Plansza.setMinSize(Dx, Dy);
-        obraz.setImage( toczos);
+        
+        obraz.setImage(toczos);
         Fitwysokosc = obraz.getFitHeight();
         Fitszetokosc = obraz.getFitWidth();
     }

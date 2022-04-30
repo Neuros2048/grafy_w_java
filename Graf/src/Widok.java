@@ -29,8 +29,7 @@ public class Widok { //extends JPanel{
         this.Dx = Dx  ;
         this.Dy = Dy;
         this.obrazek = new BufferedImage(this.Dx,this.Dy,BufferedImage.TYPE_INT_RGB );
-        Graphics2D  g2D = this.obrazek.createGraphics();
-        paint(g2D);
+        paint();
     }
     public BufferedImage pomalowane(){
         return obrazek;
@@ -137,7 +136,8 @@ public class Widok { //extends JPanel{
         }
         return new Color(r,g,b);
     }
-    public void paint(Graphics2D g2D){  //sama sie urzywa
+    public void paint(){  //sama sie urzywa
+        Graphics2D g2D = pomalowane().createGraphics();
         int i,ii;
         g2D.setColor(Color.black);
         g2D.fillRect(0, 0, Dx, Dy);
@@ -197,5 +197,41 @@ public class Widok { //extends JPanel{
                 
             }
         }
+    }
+    public void pomaluj_wynik(){
+        Graphics2D g2D = pomalowane().createGraphics();
+        int i,ii;
+        g2D.scale((double)Dx/rozmiar/x/3*2, (double)Dy/rozmiar/y/3*2);
+        int pozycja_x;
+        int pozycja_y;
+        g2D.setStroke(new BasicStroke(2));
+        g2D.setColor(Color.white);
+        for (i =0 ;i<y;i++){
+            for (ii = 0;ii<x;ii++){
+                pozycja_x = rozmiar/8 + ii*rozmiar/2*3;
+                pozycja_y = rozmiar/8 + i*rozmiar/2*3;
+                if (graf[ii+i*x].status==3){
+                    if (graf[ii+i*x].z== ii+i*x -1 ){   
+                        g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x - rozmiar, pozycja_y+rozmiar/2);
+                    }else if (graf[ii+i*x].z== ii+i*x +1 ){   
+                        g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x + rozmiar*2 , pozycja_y+rozmiar/2);
+                    }else if (graf[ii+i*x].z== ii+(i-1)*x){  
+                        g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y - rozmiar);
+                    }else if (graf[ii+i*x].z== ii+(i+1)*x ){   
+                        g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y + rozmiar*2);
+                    }
+                }
+                
+                
+            }
+        }
+        for (i =0 ;i<y;i++){
+            for (ii = 0;ii<x;ii++){
+                pozycja_x = rozmiar/8 + ii*rozmiar/2*3;
+                pozycja_y = rozmiar/8 + i*rozmiar/2*3;
+                
+            }
+        }
+
     }
 }
