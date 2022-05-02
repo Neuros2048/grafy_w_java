@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.plaf.DimensionUIResource;
 
+import algorytmy.Graf;
 import javafx.scene.image.Image;
 
 

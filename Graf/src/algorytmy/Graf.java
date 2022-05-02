@@ -1,3 +1,4 @@
+package algorytmy;
 import java.beans.BeanProperty;
 
 public class Graf{
@@ -22,7 +23,7 @@ public class Graf{
             }
         
     }
-    Graf(){
+    public Graf(){
         wieszcholki = null;
         x =0;
         y =0;

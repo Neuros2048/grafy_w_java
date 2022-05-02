@@ -1,3 +1,4 @@
+package algorytmy;
 public class Kolejka extends Dijkstra{
 
     private Lista start;

@@ -4,6 +4,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import algorytmy.Dijkstra;
+import algorytmy.Fibonacci;
+import algorytmy.Graf;
+import algorytmy.Kolejka;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

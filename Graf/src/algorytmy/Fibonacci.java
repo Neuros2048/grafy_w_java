@@ -1,3 +1,4 @@
+package algorytmy;
 
 public class Fibonacci extends Dijkstra {
     private punkt punkty[];
@@ -129,7 +130,7 @@ public class Fibonacci extends Dijkstra {
         }
     }
     @Override
-    protected void dodaj_dane(Graf graf, int x) {
+    public void dodaj_dane(Graf graf, int x) {
         this.graf = graf;
         this.x = x;
         int dlugosc = graf.dlugosc_grafu();

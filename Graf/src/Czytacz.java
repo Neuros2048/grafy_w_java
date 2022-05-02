@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
+import algorytmy.Graf;
+
 
 public class Czytacz  {
     Scanner skan;

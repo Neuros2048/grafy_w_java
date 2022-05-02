@@ -1,3 +1,5 @@
+import algorytmy.Graf;
+
 public abstract class BFS {
     Graf graf;
     int x;

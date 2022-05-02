@@ -1,7 +1,8 @@
+package algorytmy;
 public abstract class Dijkstra {
     protected Graf graf;
     protected int x;
-    protected abstract void dodaj_dane(Graf graf,int x ); 
+    public abstract void dodaj_dane(Graf graf,int x ); 
     protected abstract int get_min();
     protected abstract void zdejmij_min();
     protected abstract void zmien_wage(int xdo);
