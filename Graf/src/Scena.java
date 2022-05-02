@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -31,17 +32,11 @@ public class Scena {
     Widok wynik;
     Graf graf;
     Dijkstra algorytm1;
-    int co_narysowac;
-    @FXML
-    private RadioButton rysuj_droge;
-
-    @FXML
-    private RadioButton rysuj_graf;
+    
+   
     @FXML
     private GridPane Calosc;
 
-    @FXML
-    private ToggleGroup Droga;
 
     @FXML
     private RadioButton Fibo;
@@ -81,9 +76,18 @@ public class Scena {
 
     @FXML
     void clikniencie(MouseEvent event) {
+        
         System.out.println(event.getX());
         System.out.println( event.getY());
-        znajdz_wieszcholek(event.getX(), event.getY());
+        boolean prawy_lewy;
+        if(event.getButton() == MouseButton.PRIMARY){
+            prawy_lewy = true;
+        }else if(event.getButton()==MouseButton.SECONDARY){
+            prawy_lewy = false;
+        }else{
+            return;
+        }
+        znajdz_wieszcholek(event.getX(), event.getY(),prawy_lewy);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setImage(toczos);
 
@@ -108,14 +112,6 @@ public class Scena {
         obraz.setFitHeight(Fitwysokosc*Scala);
         obraz.setFitWidth(Fitszetokosc*Scala);
     }
-    @FXML
-    void co_rysuje(ActionEvent event) {
-        if(rysuj_graf.isSelected()){
-            co_narysowac = 0;
-        }else if(rysuj_droge.isSelected()){
-            co_narysowac = 1;
-        }
-    }
     
     @FXML
     void Wybur(ActionEvent event) {
@@ -139,16 +135,17 @@ public class Scena {
         }
 
     }
-    private void znajdz_wieszcholek(double x,double y){
+    private void znajdz_wieszcholek(double x,double y,boolean prawy_lewy){
         int pozycja_x;
         int pozycja_y;
         pozycja_x = (int) Math.floor(x/(this.Fitszetokosc*this.Scala/this.x));
         pozycja_y = (int) Math.floor(y/(this.Fitwysokosc*this.Scala/this.y));
-        if (co_narysowac ==0){
+        if (prawy_lewy){
             graf.zeruj_dane();
+            algorytm1.dodaj_dane(graf, this.x);
             algorytm1.rozwiarz(pozycja_x+pozycja_y*this.x);
             this.wynik.paint();
-        }else if (co_narysowac ==1 ){
+        }else {
             graf.okresl_scieszke(pozycja_x+pozycja_y*this.x);
             this.wynik.pomaluj_wynik();
         }
