@@ -25,21 +25,24 @@ public class Scena {
     double Scala = 1;
     double Fitwysokosc;
     double Fitszetokosc;
-    int algorytm;
+    int ktury_algorytm;
     Scanner skan;
     int x,y;
     Widok wynik;
+    Graf graf;
     Dijkstra algorytm1;
+    int co_narysowac;
     @FXML
-    private Pane Plansza;
+    private RadioButton rysuj_droge;
+
+    @FXML
+    private RadioButton rysuj_graf;
     @FXML
     private GridPane Calosc;
 
     @FXML
-    private ResourceBundle resources;
+    private ToggleGroup Droga;
 
-    @FXML
-    private URL location;
     @FXML
     private RadioButton Fibo;
 
@@ -50,9 +53,14 @@ public class Scena {
     private RadioButton Lista;
 
     @FXML
+    private Pane Plansza;
+
+    @FXML
     private Button Startdij;
-    
-    
+
+    @FXML
+    private ToggleGroup algorytm;
+
     @FXML
     private TextField do_kond;
 
@@ -60,10 +68,17 @@ public class Scena {
     private ImageView obraz;
 
     @FXML
+    private RadioButton poczatek;
+
+    @FXML
     private ScrollPane pole;
 
     @FXML
     private TextField z_kond;
+
+    @FXML
+    private TextField zawartosc;
+
     @FXML
     void clikniencie(MouseEvent event) {
         System.out.println(event.getX());
@@ -73,7 +88,6 @@ public class Scena {
         obraz.setImage(toczos);
 
         System.out.println("jestes we mnie");
-
     }
     @FXML
     void minus(ActionEvent event) {
@@ -94,15 +108,21 @@ public class Scena {
         obraz.setFitHeight(Fitwysokosc*Scala);
         obraz.setFitWidth(Fitszetokosc*Scala);
     }
-    
     @FXML
-    private TextField zawartosc;
+    void co_rysuje(ActionEvent event) {
+        if(rysuj_graf.isSelected()){
+            co_narysowac = 0;
+        }else if(rysuj_droge.isSelected()){
+            co_narysowac = 1;
+        }
+    }
+    
     @FXML
     void Wybur(ActionEvent event) {
         if(Lista.isSelected()){
-            algorytm = 1;
+            ktury_algorytm = 1;
         }else if(Fibo.isSelected()){
-            algorytm = 0;
+            ktury_algorytm = 0;
         }
     }
     @FXML
@@ -124,43 +144,43 @@ public class Scena {
         int pozycja_y;
         pozycja_x = (int) Math.floor(x/(this.Fitszetokosc*this.Scala/this.x));
         pozycja_y = (int) Math.floor(y/(this.Fitwysokosc*this.Scala/this.y));
-        algorytm1.okresl_scieszke(pozycja_x+pozycja_y*this.x);
-        this.wynik.pomaluj_wynik();
+        if (co_narysowac ==0){
+            graf.zeruj_dane();
+            algorytm1.rozwiarz(pozycja_x+pozycja_y*this.x);
+            this.wynik.paint();
+        }else if (co_narysowac ==1 ){
+            graf.okresl_scieszke(pozycja_x+pozycja_y*this.x);
+            this.wynik.pomaluj_wynik();
+        }
         System.out.println(pozycja_x+"    "+pozycja_y);
         return ;
     }
     @FXML
     void Startdij(ActionEvent event) {
-
-
-        int poczontek = Integer.parseInt(z_kond.getText());
-        int szukane = Integer.parseInt(do_kond.getText());
         Czytacz dane_pliku = new Czytacz(skan);
-        
-        
         this.y = dane_pliku.czytaj_int();
         this.x = dane_pliku.czytaj_int();
         System.out.println(this.y +" i "+ this.x);
-        Wieszcholek[] graf = new Wieszcholek[x*y];
+        this.graf = new Graf();
+        this.graf.dodaj_graf(x, y);
         
-        int i;
-        for (i=0;i<x*y;i++){
-            graf[i] = new Wieszcholek();
-        }
+        
         dane_pliku.wypelnij(graf, x,y);
+        
         //Dijkstra algorytm = new Dijkstra(graf, x);
-        if (algorytm == 0){
+        if (ktury_algorytm == 0){
             algorytm1 = new Fibonacci();
         }else{
             algorytm1 = new Kolejka();
         }
         
         algorytm1.dodaj_dane(graf, x);
+        System.out.println("czyto aj");
         //if(algorytm.czy_istnieje(poczontek, szukane, x*y)){
            // System.out.println("Nie ma połaczenia miedzy elementami");
            // return;
         //}
-        algorytm1.rozwiarz(poczontek);
+        System.out.println(this.y +" i "+ this.x);
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);
         }*/
@@ -177,7 +197,9 @@ public class Scena {
         if (Dy < rozmiar*y*3/2){
             Dy = rozmiar*y*3/2;
         }
+        
         wynik =  new Widok(x, y, graf, Dx, Dy,rozmiar);
+        System.out.println(this.y +" i "+ this.x);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setFitHeight(Dy);
         obraz.setFitWidth(Dx);

@@ -18,14 +18,14 @@ public class Widok { //extends JPanel{
     double maxw; // max pojedycznej drogi
     double minw; // min pojedynczej drogi
     BufferedImage obrazek;
-    Wieszcholek[] graf;
-    Widok(int x,int y,Wieszcholek[] graf,int Dx,int Dy,int rozmiar){
+    Graf graf;
+    Widok(int x,int y,Graf graf,int Dx,int Dy,int rozmiar){
         this.graf = graf;
         this.x =x;
         this.y = y;
         this.rozmiar = rozmiar;
         skala = 1;
-        najwieksze(graf);
+        
         this.Dx = Dx  ;
         this.Dy = Dy;
         this.obrazek = new BufferedImage(this.Dx,this.Dy,BufferedImage.TYPE_INT_RGB );
@@ -34,56 +34,40 @@ public class Widok { //extends JPanel{
     public BufferedImage pomalowane(){
         return obrazek;
     }
-    private void najwieksze(Wieszcholek[] graf){
+    private void najwieksze(){
         int i;
-        max = graf[0].waga;
-        maxw = graf[0].DD;
+        max = graf.dostan_waga(0) ;
+        maxw = graf.dostan_droge(0, 1);
         minw = 0;
         for (i=0;i<x*y;i++){
-            if(graf[i].DD!= -1){
-                minw = graf[i].DD;
+            if(graf.dostan_droge(i, 1)!= -1){
+                minw = graf.dostan_droge(i, 1);
                 break;
             }
-            if(graf[i].DP!= -1){
-                minw = graf[i].DP;
+            if(graf.dostan_droge(i, 2)!= -1){
+                minw = graf.dostan_droge(i, 2);
                 break;
             }
-            if(graf[i].DL!= -1){
-                minw = graf[i].DL;
+            if(graf.dostan_droge(i, 3)!= -1){
+                minw = graf.dostan_droge(i, 3);
                 break;
             }
-            if(graf[i].DG!= -1){
-                minw = graf[i].DG;
+            if(graf.dostan_droge(i, 4)!= -1){
+                minw = graf.dostan_droge(i, 4);
                 break;
             }
         }
         for (i=0;i<x*y;i++){
-            if (max < graf[i].waga){
-                max = graf[i].waga;
+            if (max < graf.dostan_waga(i)){
+                max = graf.dostan_waga(i);
             }
-            if(maxw < graf[i].DD){
-                maxw = graf[i].DD;
-            }
-            if(maxw < graf[i].DP){
-                maxw = graf[i].DP;
-            }
-            if(maxw < graf[i].DL){
-                maxw = graf[i].DL;
-            }
-            if(maxw < graf[i].DG){
-                maxw = graf[i].DG;
-            }
-            if(graf[i].DD != -1 && minw > graf[i].DD){
-                minw = graf[i].DD;
-            }
-            if(graf[i].DP != -1 && minw > graf[i].DP){
-                minw = graf[i].DP;
-            }
-            if(graf[i].DL != -1 && minw > graf[i].DL){
-                minw = graf[i].DL;
-            }
-            if(graf[i].DG != -1 && minw > graf[i].DG){
-                minw = graf[i].DG;
+            for(int od_1_do_4 = 1;od_1_do_4<5;od_1_do_4++ ){
+                if(maxw < graf.dostan_droge(i,od_1_do_4)){
+                    maxw = graf.dostan_droge(i,od_1_do_4);
+                }
+                if(graf.dostan_droge(i,od_1_do_4) != -1 && minw > graf.dostan_droge(i,od_1_do_4)){
+                    minw = graf.dostan_droge(i,od_1_do_4);
+                }
             }
         }
 
@@ -137,6 +121,7 @@ public class Widok { //extends JPanel{
         return new Color(r,g,b);
     }
     public void paint(){  //sama sie urzywa
+        najwieksze();
         Graphics2D g2D = pomalowane().createGraphics();
         int i,ii;
         g2D.setColor(Color.black);
@@ -152,18 +137,18 @@ public class Widok { //extends JPanel{
                 pozycja_y = rozmiar/8 + i*rozmiar/2*3;
 
                 iixi = ii+i*x;
-                if (graf[iixi].DP != -1){
-                    g2D.setColor(tecza(graf[iixi].DP,graf[iixi+1].DL));   
+                if (graf.dostan_droge(iixi,  3) != -1){
+                    g2D.setColor(tecza(graf.dostan_droge(iixi, 3 ),graf.dostan_droge(iixi+1, 1 ) ));   
                     g2D.drawLine(pozycja_x + rozmiar, pozycja_y + rozmiar/2 , pozycja_x + rozmiar/2*3 , pozycja_y+rozmiar/2);
                 }
-                if (graf[iixi].DD != -1){ 
-                    g2D.setColor(tecza(graf[iixi].DD,graf[ii+(i+1)*x].DG));
+                if (graf.dostan_droge(iixi,4  ) != -1){ 
+                    g2D.setColor(tecza(graf.dostan_droge(iixi, 4 ),graf.dostan_droge(ii+(i+1)*x,2)));
                     g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar, pozycja_x + rozmiar/2 , pozycja_y+rozmiar/2*3);
                 }
-                if (graf[iixi].DG==-1&&graf[iixi].DP==-1&&graf[iixi].DD==-1&&graf[iixi].DL==-1){
+                if (graf.dostan_droge(iixi,  2)==-1&&graf.dostan_droge(iixi,3  )==-1&&graf.dostan_droge(iixi, 4 )==-1&&graf.dostan_droge(iixi, 1 )==-1){
                     //tak na oko to szybciej powinno dziłać
                 }else {
-                    g2D.setColor(tecza(graf[iixi].waga));
+                    g2D.setColor(tecza(graf.dostan_waga(iixi)));
                     g2D.fillOval(pozycja_x,pozycja_y, rozmiar, rozmiar);
                 }
                 
@@ -175,16 +160,17 @@ public class Widok { //extends JPanel{
             for (ii = 0;ii<x;ii++){
                 pozycja_x = rozmiar/8 + ii*rozmiar/2*3;
                 pozycja_y = rozmiar/8 + i*rozmiar/2*3;
-                if (graf[ii+i*x].status==3){
-                    if (graf[ii+i*x].z== ii+i*x -1 ){   
+                if (graf.dostan_status(ii+i*x)==3){
+                    if (graf.dostan_droge_z(ii+i*x)== ii+i*x -1 ){   
                         g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x - rozmiar, pozycja_y+rozmiar/2);
-                    }else if (graf[ii+i*x].z== ii+i*x +1 ){   
+                    }else if (graf.dostan_droge_z(ii+i*x)== ii+i*x +1 ){   
                         g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x + rozmiar*2 , pozycja_y+rozmiar/2);
-                    }else if (graf[ii+i*x].z== ii+(i-1)*x){  
+                    }else if (graf.dostan_droge_z(ii+i*x)== ii+(i-1)*x){  
                         g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y - rozmiar);
-                    }else if (graf[ii+i*x].z== ii+(i+1)*x ){   
+                    }else if (graf.dostan_droge_z(ii+i*x)== ii+(i+1)*x ){   
                         g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y + rozmiar*2);
                     }
+                    
                 }
                 
                 
@@ -210,14 +196,14 @@ public class Widok { //extends JPanel{
             for (ii = 0;ii<x;ii++){
                 pozycja_x = rozmiar/8 + ii*rozmiar/2*3;
                 pozycja_y = rozmiar/8 + i*rozmiar/2*3;
-                if (graf[ii+i*x].status==3){
-                    if (graf[ii+i*x].z== ii+i*x -1 ){   
+                if (graf.dostan_status(ii+i*x)==3){
+                    if (graf.dostan_droge_z(ii+i*x)== ii+i*x -1 ){   
                         g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x - rozmiar, pozycja_y+rozmiar/2);
-                    }else if (graf[ii+i*x].z== ii+i*x +1 ){   
+                    }else if (graf.dostan_droge_z(ii+i*x)== ii+i*x +1 ){   
                         g2D.drawLine(pozycja_x+rozmiar/2, pozycja_y + rozmiar/2 , pozycja_x + rozmiar*2 , pozycja_y+rozmiar/2);
-                    }else if (graf[ii+i*x].z== ii+(i-1)*x){  
+                    }else if (graf.dostan_droge_z(ii+i*x)== ii+(i-1)*x){  
                         g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y - rozmiar);
-                    }else if (graf[ii+i*x].z== ii+(i+1)*x ){   
+                    }else if (graf.dostan_droge_z(ii+i*x)== ii+(i+1)*x ){   
                         g2D.drawLine(pozycja_x + rozmiar/2, pozycja_y + rozmiar/2, pozycja_x + rozmiar/2 , pozycja_y + rozmiar*2);
                     }
                 }

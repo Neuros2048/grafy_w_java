@@ -12,7 +12,7 @@ public class Kolejka extends Dijkstra{
     }
     
     @Override
-    public void dodaj_dane(Wieszcholek[] graf, int x) {
+    public void dodaj_dane(Graf graf, int x) {
         super.graf = graf;
         super.x = x;
         return;
@@ -43,7 +43,7 @@ public class Kolejka extends Dijkstra{
             start = nowy;
             return;
         }
-        if (graf[start.klucz].waga>graf[nowy.klucz].waga){
+        if ( graf.dostan_waga(start.klucz)> graf.dostan_waga(nowy.klucz)){
             nowy.nastepny = start;
             start = nowy;
             return;
@@ -53,7 +53,7 @@ public class Kolejka extends Dijkstra{
         while(tymczasowa.nastepny!=null){
             porzedni = tymczasowa;
             tymczasowa = tymczasowa.nastepny;
-            if (graf[tymczasowa.klucz].waga>graf[nowy.klucz].waga){
+            if ( graf.dostan_waga(tymczasowa.klucz)> graf.dostan_waga(nowy.klucz) ){
                 porzedni.nastepny=nowy;
                 nowy.nastepny= tymczasowa;
                 return;
@@ -90,7 +90,7 @@ public class Kolejka extends Dijkstra{
         if (start==zmieniony){
             return;
         }
-        if (graf[start.klucz].waga>graf[zmieniony.klucz].waga){
+        if (  graf.dostan_waga(start.klucz)> graf.dostan_waga(zmieniony.klucz) ){
             znajdz_poprzednika(zmieniony).nastepny = zmieniony.nastepny;
             zmieniony.nastepny = start;
             start = zmieniony;
@@ -101,7 +101,7 @@ public class Kolejka extends Dijkstra{
         while(tymczasowy.nastepny!=zmieniony){
             poprzedni = tymczasowy;
             tymczasowy = tymczasowy.nastepny;
-            if(graf[tymczasowy.klucz].waga>graf[zmieniony.klucz].waga){
+            if( graf.dostan_waga(tymczasowy.klucz)> graf.dostan_waga(zmieniony.klucz) ){
                 znajdz_poprzednika(zmieniony).nastepny = zmieniony.nastepny;
                 zmieniony.nastepny = tymczasowy;
                 poprzedni.nastepny = zmieniony;
@@ -118,7 +118,7 @@ public class Kolejka extends Dijkstra{
         }
         return tymczasowy;
     }
-    
+    /*
     public boolean czy_istnieje(int start,int koniec,int xy){
         boolean wynik = true; // czy nie działa
         stworzenie(start);
@@ -175,7 +175,7 @@ public class Kolejka extends Dijkstra{
 
 
         return wynik;
-    }
+    }*/
 
     
     

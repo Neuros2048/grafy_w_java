@@ -16,7 +16,7 @@ public class Czytacz  {
         return skan.nextInt();
     }
     
-    public void wypelnij(Wieszcholek[] graf,int x,int y){
+    public void wypelnij(Graf graf,int x,int y){
         int i;
         int xy =x*y;
         int polaczenie;
@@ -33,17 +33,7 @@ public class Czytacz  {
                 c = skanlini.next();
                 waga = Double.parseDouble(c.substring(1));
                 //System.out.println(polaczenie+"ds"+i);
-                if (polaczenie == i-1){
-                    graf[i].DL = waga;
-                }else if(polaczenie==i+1){
-                    graf[i].DP = waga;
-                }else if (polaczenie == i+x){
-                    graf[i].DD = waga;
-                }else if (polaczenie == i -x){
-                    graf[i].DG = waga;
-                }else{
-                    System.out.println("Nie właścoiwe połaczenmoie");
-                }
+                graf.dodaj_droge(i, polaczenie, waga);
                 
             }/*
             //Linia =skan.nextLine();
