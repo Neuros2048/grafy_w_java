@@ -2,7 +2,7 @@ package algorytmy;
 public class Kolejka extends Dijkstra{
 
     private Lista start;
-    private Lista koniec;
+    //private Lista koniec;
     private class Lista {
         private Lista nastepny;
         private int klucz;
@@ -62,9 +62,9 @@ public class Kolejka extends Dijkstra{
     @Override
     protected void stworzenie(int poczontek) {
         this.start = new Lista(poczontek);
-        this.koniec = this.start;
+        //this.koniec = this.start;
         return;
-    }
+    }/*
     private void na_koniec(Lista nowy){
         if (start==null){
             start = nowy;
@@ -73,7 +73,7 @@ public class Kolejka extends Dijkstra{
         }
         koniec.nastepny =nowy;
         koniec = nowy;
-    }
+    }*/
     private Lista znajdz_poprzednika(Lista ja){
         Lista tymczasowy = start;
         while(tymczasowy.nastepny!=ja){

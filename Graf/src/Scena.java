@@ -3,7 +3,6 @@ import algorytmy.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -173,7 +171,8 @@ public class Scena {
             Dy = rozmiar*y*3/2;
         }
         
-        wynik =  new Widok(x, y, graf, Dx, Dy,rozmiar);
+        wynik =  new Widok();
+        wynik.Storz_widok(x, y, graf, Dx, Dy, rozmiar);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setFitHeight(Dy);
         obraz.setFitWidth(Dx);

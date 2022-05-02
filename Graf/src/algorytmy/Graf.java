@@ -3,7 +3,7 @@ package algorytmy;
 public class Graf{
     private Wieszcholek [] wieszcholki;
     private int x,y; 
-    public class Wieszcholek {
+    private class Wieszcholek {
         public int z ;
         public int status;
         public double waga;
@@ -73,9 +73,9 @@ public class Graf{
     *@return true-udalo się false-nieprawidłowe parametry i lub iz
     */
     public boolean dodaj_droge(int i,int iz, double waga ){
-        if (i%x != 0 && iz == i-1){
+        if (iz == i-1 && i%x != 0 ){
             wieszcholki[i].DL = waga;
-        }else if(i%x != x-1 && iz == i+1){
+        }else if(iz == i+1 && i%x != x-1 ){
             wieszcholki[i].DP = waga;
         }else if (dlugosc_grafu() > iz && iz == i+x){
             wieszcholki[i].DD = waga;

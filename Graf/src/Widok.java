@@ -1,10 +1,8 @@
 //import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import javax.swing.plaf.DimensionUIResource;
 
 import algorytmy.Graf;
-import javafx.scene.image.Image;
 
 
 public class Widok { //extends JPanel{
@@ -20,7 +18,10 @@ public class Widok { //extends JPanel{
     double minw; // min pojedynczej drogi
     BufferedImage obrazek;
     Graf graf;
-    Widok(int x,int y,Graf graf,int Dx,int Dy,int rozmiar){
+    public Widok(){
+        
+    }
+    public void Storz_widok(int x,int y,Graf graf,int Dx,int Dy,int rozmiar){
         this.graf = graf;
         this.x =x;
         this.y = y;
