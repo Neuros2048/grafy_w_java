@@ -130,20 +130,6 @@ public class Fibonacci extends Dijkstra {
         }
     }
     @Override
-    public void dodaj_dane(Graf graf, int x) {
-        this.graf = graf;
-        this.x = x;
-        int dlugosc = graf.dlugosc_grafu();
-        this.punkty = new punkt[dlugosc];
-        for(int i =0;i< dlugosc;i++){
-            this.punkty[i] = new punkt(i);
-        }
-        this.tymczasowa = new punkt[1+Math.getExponent(dlugosc)];
-        for (int i = 0; i< this.tymczasowa.length;i++){
-            this.tymczasowa[i] = null;
-        }
-    }
-    @Override
     protected int get_min() {
         return this.min.klucz;
     }
@@ -195,6 +181,15 @@ public class Fibonacci extends Dijkstra {
     }
     @Override
     protected void stworzenie(int poczontek) {
+        int dlugosc = graf.dlugosc_grafu();
+        this.punkty = new punkt[dlugosc];
+        for(int i =0;i< dlugosc;i++){
+            this.punkty[i] = new punkt(i);
+        }
+        this.tymczasowa = new punkt[1+Math.getExponent(dlugosc)];
+        for (int i = 0; i< this.tymczasowa.length;i++){
+            this.tymczasowa[i] = null;
+        }
         this.min = this.punkty[poczontek];
     }
     

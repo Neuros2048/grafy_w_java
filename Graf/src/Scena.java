@@ -1,13 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Scanner;
 
-import algorytmy.Dijkstra;
-import algorytmy.Fibonacci;
-import algorytmy.Graf;
-import algorytmy.Kolejka;
+import algorytmy.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,7 +23,7 @@ public class Scena {
     double Fitwysokosc;
     double Fitszetokosc;
     int ktury_algorytm;
-    Scanner skan;
+    Czytacz dane_pliku;
     int x,y;
     Widok wynik;
     Graf graf;
@@ -40,7 +32,6 @@ public class Scena {
    
     @FXML
     private GridPane Calosc;
-
 
     @FXML
     private RadioButton Fibo;
@@ -61,9 +52,6 @@ public class Scena {
     private ToggleGroup algorytm;
 
     @FXML
-    private TextField do_kond;
-
-    @FXML
     private ImageView obraz;
 
     @FXML
@@ -73,16 +61,11 @@ public class Scena {
     private ScrollPane pole;
 
     @FXML
-    private TextField z_kond;
-
-    @FXML
     private TextField zawartosc;
 
     @FXML
     void clikniencie(MouseEvent event) {
         
-        System.out.println(event.getX());
-        System.out.println( event.getY());
         boolean prawy_lewy;
         if(event.getButton() == MouseButton.PRIMARY){
             prawy_lewy = true;
@@ -94,8 +77,6 @@ public class Scena {
         znajdz_wieszcholek(event.getX(), event.getY(),prawy_lewy);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setImage(toczos);
-
-        System.out.println("jestes we mnie");
     }
     @FXML
     void minus(ActionEvent event) {
@@ -128,15 +109,14 @@ public class Scena {
     @FXML
     void wcisnienty(ActionEvent event) {
 
-        try {
-            Scanner skan = new Scanner(new File("Graf/Pliki_textowe/"+zawartosc.getText()));
+        Czytacz plik = new Czytacz();
+        if(plik.dodaj_plik("Graf/Pliki_textowe/"+zawartosc.getText())){
             Komunikator.setText("Udało się odczytać plik");
-            this.skan = skan;
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            this.dane_pliku = plik;
+        }else{
             Komunikator.setText("Nie udało się odczytać pliku");
-            this.skan = null;
         }
+        
 
     }
     private void znajdz_wieszcholek(double x,double y,boolean prawy_lewy){
@@ -146,22 +126,18 @@ public class Scena {
         pozycja_y = (int) Math.floor(y/(this.Fitwysokosc*this.Scala/this.y));
         if (prawy_lewy){
             graf.zeruj_dane();
-            algorytm1.dodaj_dane(graf, this.x);
             algorytm1.rozwiarz(pozycja_x+pozycja_y*this.x);
             this.wynik.paint();
         }else {
             graf.okresl_scieszke(pozycja_x+pozycja_y*this.x);
             this.wynik.pomaluj_wynik();
         }
-        System.out.println(pozycja_x+"    "+pozycja_y);
         return ;
     }
     @FXML
     void Startdij(ActionEvent event) {
-        Czytacz dane_pliku = new Czytacz(skan);
         this.y = dane_pliku.czytaj_int();
         this.x = dane_pliku.czytaj_int();
-        System.out.println(this.y +" i "+ this.x);
         this.graf = new Graf();
         this.graf.dodaj_graf(x, y);
         
@@ -175,19 +151,17 @@ public class Scena {
             algorytm1 = new Kolejka();
         }
         
-        algorytm1.dodaj_dane(graf, x);
-        System.out.println("czyto aj");
+        algorytm1.dodaj_dane(graf);
         //if(algorytm.czy_istnieje(poczontek, szukane, x*y)){
            // System.out.println("Nie ma połaczenia miedzy elementami");
            // return;
         //}
-        System.out.println(this.y +" i "+ this.x);
         /*for (i=0;i<x*y;i++){
             System.out.println(graf[i].waga);
         }*/
         //algorytm1.okresl_scieszke(szukane);
         //new Obraz(x,y,graf);
-        //Pisarz generator = new Pisarz("plikawypisany1.txt");
+        //Pisarz generator = new Pisarz();
         //generator.napisz(x, y);
         int rozmiar = 8;
         int Dx= (int) Math.round(pole.getWidth());
@@ -200,7 +174,6 @@ public class Scena {
         }
         
         wynik =  new Widok(x, y, graf, Dx, Dy,rozmiar);
-        System.out.println(this.y +" i "+ this.x);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setFitHeight(Dy);
         obraz.setFitWidth(Dx);

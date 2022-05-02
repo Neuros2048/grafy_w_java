@@ -44,10 +44,6 @@
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="Fibo" mnemonicParsing="false" onAction="#Wybur" selected="true" text="Fibonacci heap" toggleGroup="$algorytm" />
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="291.0" text="Wieszchołek począdkowy" textAlignment="CENTER" />
-            <TextField fx:id="z_kond" />
-            <Label alignment="CENTER" prefHeight="35.0" prefWidth="301.0" text="Wieszchołek końcowy" textAlignment="CENTER" />
-            <TextField fx:id="do_kond" />
          </children>
       </VBox>
       <GridPane>

@@ -10,9 +10,18 @@ public class Czytacz  {
     Scanner skan;
     Scanner skanlini;
     FileReader czytaj;
-    Czytacz(Scanner skan) {
+    
+    public boolean dodaj_plik(String File_name){
+        Scanner skan;
+        try {
+            skan = new Scanner(new File(File_name));
+            
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            return false;
+        }
         this.skan = skan;
-
+        return true;
     }
     public int czytaj_int(){
         return skan.nextInt();
@@ -34,8 +43,15 @@ public class Czytacz  {
                 polaczenie = skanlini.nextInt();
                 c = skanlini.next();
                 waga = Double.parseDouble(c.substring(1));
+                if(waga < 0 ){
+                    System.out.println("Waga drogi nie możebyć ujemna a ma wartośc "+waga);
+                    return;
+                }
                 //System.out.println(polaczenie+"ds"+i);
-                graf.dodaj_droge(i, polaczenie, waga);
+                if(!graf.dodaj_droge(i, polaczenie, waga)){
+                    System.out.println("Niewłaściwe połączeie wieszchołków");
+                    return;
+                }
                 
             }/*
             //Linia =skan.nextLine();

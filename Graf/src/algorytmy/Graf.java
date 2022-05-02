@@ -1,5 +1,4 @@
 package algorytmy;
-import java.beans.BeanProperty;
 
 public class Graf{
     private Wieszcholek [] wieszcholki;
@@ -56,7 +55,7 @@ public class Graf{
      * 
      * @param i
      * @param od_1_do_4 1-DL 2-DG 3-DP 4-DD
-     * @return
+     * @return -1 nieporawna wartość drugiego argumentu
      */
     public double dostan_droge(int i,int od_1_do_4){
         if (od_1_do_4 == 1){
@@ -70,15 +69,17 @@ public class Graf{
         }else{
             return -1;
         }
-    }
+    }/**
+    *@return true-udalo się false-nieprawidłowe parametry i lub iz
+    */
     public boolean dodaj_droge(int i,int iz, double waga ){
-        if (iz == i-1){
+        if (i%x != 0 && iz == i-1){
             wieszcholki[i].DL = waga;
-        }else if(iz==i+1){
+        }else if(i%x != x-1 && iz == i+1){
             wieszcholki[i].DP = waga;
-        }else if (iz == i+x){
+        }else if (dlugosc_grafu() > iz && iz == i+x){
             wieszcholki[i].DD = waga;
-        }else if (iz == i -x){
+        }else if (iz >= 0 && iz == i -x){
             wieszcholki[i].DG = waga;
         }else{
             return false;
@@ -109,5 +110,11 @@ public class Graf{
             wieszcholki[i].z = -2;
             wieszcholki[i].waga = 0;
         }
+    }
+    public int dostan_wymiar_x(){
+        return this.x;
+    }
+    public int dostan_wymiar_y(){
+        return this.y;
     }
 }

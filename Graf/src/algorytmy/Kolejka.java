@@ -12,13 +12,7 @@ public class Kolejka extends Dijkstra{
         }
     }
     
-    @Override
-    public void dodaj_dane(Graf graf, int x) {
-        super.graf = graf;
-        super.x = x;
-        return;
-    }
-
+    
     @Override 
     protected int get_min() {
         return this.start.klucz;
@@ -119,65 +113,6 @@ public class Kolejka extends Dijkstra{
         }
         return tymczasowy;
     }
-    /*
-    public boolean czy_istnieje(int start,int koniec,int xy){
-        boolean wynik = true; // czy nie działa
-        stworzenie(start);
-        int startx;
-        int xdo; //bo czemu nie 
-        int ile= 1;
-        graf[start].status = 2;
-        while(ile>0){
-            startx = get_min();
-            zdejmij_min();
-            if (graf[startx].DG != -1){
-                xdo = startx-x;
-                if (graf[xdo].status==0){
-                    graf[xdo].status = 2;
-                    na_koniec(new Lista(xdo));
-                    ile++;
-                }
-            }
-            if (graf[startx].DP != -1){
-                xdo = startx+1;
-                if (graf[xdo].status==0){
-                    graf[xdo].status = 2;
-                    na_koniec(new Lista(xdo));
-                    ile++;
-                }
-            }
-            if (graf[startx].DD != -1){
-                xdo = startx+x;
-                if (graf[xdo].status==0){
-                    graf[xdo].status = 2;
-                    na_koniec(new Lista(xdo));
-                    ile++;
-                }
-            }
-            if (graf[startx].DL != -1){
-                xdo = startx-1;
-                if (graf[xdo].status==0){
-                    graf[xdo].status = 2;
-                    na_koniec(new Lista(xdo));
-                    ile++;
-                }
-            }
-        }
-        if (graf[koniec].status==2){
-            wynik = false;
-        }
-        for (int j =0 ;j <xy;j++){
-            if (graf[j].status==2 ){
-            }
-        }
-        for (int i = 0 ;i<xy;i++){
-            graf[i].status=0;
-        }
-
-
-        return wynik;
-    }*/
-
     
     
     
