@@ -125,7 +125,7 @@ public class Scena {
         if (prawy_lewy){
             graf.zeruj_dane();
             algorytm1.rozwiarz(pozycja_x+pozycja_y*this.x);
-            this.wynik.paint();
+            this.wynik.pomaluj();
         }else {
             graf.okresl_scieszke(pozycja_x+pozycja_y*this.x);
             this.wynik.pomaluj_wynik();
@@ -172,7 +172,7 @@ public class Scena {
         }
         
         wynik =  new Widok();
-        wynik.Storz_widok(x, y, graf, Dx, Dy, rozmiar);
+        wynik.Stworz_widok(graf, Dx, Dy, rozmiar);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setFitHeight(Dy);
         obraz.setFitWidth(Dx);

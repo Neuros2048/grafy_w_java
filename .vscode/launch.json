@@ -14,10 +14,10 @@
         },
         {
             "type": "java",
-            "name": "Launch Start1",
+            "name": "Launch Start",
             "request": "launch",
             "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-18.0.1/lib\" --add-modules javafx.controls,javafx.fxml",
-            "mainClass": "Start1",
+            "mainClass": "Start",
             "projectName": "grafy_w_java_8713defb"
         }
     ]

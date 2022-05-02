@@ -10,7 +10,6 @@ public class Widok { //extends JPanel{
     int x;
     int y;
     int rozmiar;
-    int skala;// odwortność, jak rośnie to maleje wszytko
     int Dx;
     int Dy;
     double max; //max całkowitej drogi
@@ -21,17 +20,16 @@ public class Widok { //extends JPanel{
     public Widok(){
         
     }
-    public void Storz_widok(int x,int y,Graf graf,int Dx,int Dy,int rozmiar){
+    public void Stworz_widok(Graf graf,int Dx,int Dy,int rozmiar){
         this.graf = graf;
-        this.x =x;
-        this.y = y;
+        this.x =graf.dostan_wymiar_x();
+        this.y = graf.dostan_wymiar_y();
         this.rozmiar = rozmiar;
-        skala = 1;
         
         this.Dx = Dx  ;
         this.Dy = Dy;
         this.obrazek = new BufferedImage(this.Dx,this.Dy,BufferedImage.TYPE_INT_RGB );
-        paint();
+        pomaluj();
     }
     public BufferedImage pomalowane(){
         return obrazek;
@@ -122,7 +120,7 @@ public class Widok { //extends JPanel{
         }
         return new Color(r,g,b);
     }
-    public void paint(){  //sama sie urzywa
+    public void pomaluj(){  //sama sie urzywa
         najwieksze();
         Graphics2D g2D = pomalowane().createGraphics();
         int i,ii;
