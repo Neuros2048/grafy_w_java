@@ -1,3 +1,4 @@
+package algorytmy;
 
 public class Fibonacci extends Dijkstra {
     private punkt punkty[];
@@ -31,7 +32,7 @@ public class Fibonacci extends Dijkstra {
         nowy.brat2 = this.min;
         nowy.brat1.brat2 = nowy;
         this.min.brat1 = nowy;
-        if (this.graf[this.min.klucz].waga>this.graf[nowy.klucz].waga){
+        if (this.graf.dostan_waga(this.min.klucz)  >this.graf.dostan_waga(nowy.klucz)){
             this.min = nowy;
         }
         return;
@@ -58,7 +59,7 @@ public class Fibonacci extends Dijkstra {
         if (tymczasowa[w_tablicy]==null){
             tymczasowa[w_tablicy] = tymczas;
         }else{
-            if ( graf[tymczasowa[w_tablicy].klucz].waga>graf[tymczas.klucz].waga ){
+            if (this.graf.dostan_waga(tymczasowa[w_tablicy].klucz)  >this.graf.dostan_waga(tymczas.klucz)){
                 dodaj_dziecko(tymczas, tymczasowa[w_tablicy]);
                 tymczasowa[w_tablicy]=null;
                 dodaj_tymczasowa(tymczas);
@@ -113,7 +114,7 @@ public class Fibonacci extends Dijkstra {
             return;
         }
         else if (nowy.rodzic == null ){
-            if(graf[this.min.klucz].waga>graf[nowy.klucz].waga){
+            if(this.graf.dostan_waga(this.min.klucz)  >this.graf.dostan_waga(nowy.klucz)){
                 nowy.brat1.brat2 =nowy.brat2;
                 nowy.brat2.brat1 = nowy.brat1;
                 nowy.brat1 = this.min.brat1;
@@ -123,23 +124,9 @@ public class Fibonacci extends Dijkstra {
                 this.min = nowy;
             }
         }
-        else if(graf[nowy.rodzic.klucz].waga>graf[nowy.klucz].waga){
+        else if(this.graf.dostan_waga(nowy.rodzic.klucz) > this.graf.dostan_waga(nowy.klucz)){
 
             usun_punkt(nowy);
-        }
-    }
-    @Override
-    protected void dodaj_dane(Wieszcholek[] graf, int x) {
-        this.graf = graf;
-        this.x = x;
-        int dlugosc = graf.length;
-        this.punkty = new punkt[dlugosc];
-        for(int i =0;i< dlugosc;i++){
-            this.punkty[i] = new punkt(i);
-        }
-        this.tymczasowa = new punkt[1+Math.getExponent(dlugosc)];
-        for (int i = 0; i< this.tymczasowa.length;i++){
-            this.tymczasowa[i] = null;
         }
     }
     @Override
@@ -194,6 +181,15 @@ public class Fibonacci extends Dijkstra {
     }
     @Override
     protected void stworzenie(int poczontek) {
+        int dlugosc = graf.dlugosc_grafu();
+        this.punkty = new punkt[dlugosc];
+        for(int i =0;i< dlugosc;i++){
+            this.punkty[i] = new punkt(i);
+        }
+        this.tymczasowa = new punkt[1+Math.getExponent(dlugosc)];
+        for (int i = 0; i< this.tymczasowa.length;i++){
+            this.tymczasowa[i] = null;
+        }
         this.min = this.punkty[poczontek];
     }
     

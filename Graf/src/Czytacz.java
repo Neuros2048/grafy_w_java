@@ -3,24 +3,31 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
+import algorytmy.Graf;
+
 
 public class Czytacz  {
     Scanner skan;
     Scanner skanlini;
     FileReader czytaj;
-    Czytacz(File plik) {
+    
+    public boolean dodaj_plik(String File_name){
+        Scanner skan;
         try {
-        skan = new Scanner(plik);
-        //czytaj = new FileReader(plik);
-        } catch(FileNotFoundException e){
-            System.out.println("Nie moge otworzyć pliku");
-        } 
+            skan = new Scanner(new File(File_name));
+            
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            return false;
+        }
+        this.skan = skan;
+        return true;
     }
     public int czytaj_int(){
         return skan.nextInt();
     }
     
-    public void wypelnij(Wieszcholek[] graf,int x,int y){
+    public void wypelnij(Graf graf,int x,int y){
         int i;
         int xy =x*y;
         int polaczenie;
@@ -36,17 +43,14 @@ public class Czytacz  {
                 polaczenie = skanlini.nextInt();
                 c = skanlini.next();
                 waga = Double.parseDouble(c.substring(1));
+                if(waga < 0 ){
+                    System.out.println("Waga drogi nie możebyć ujemna a ma wartośc "+waga);
+                    return;
+                }
                 //System.out.println(polaczenie+"ds"+i);
-                if (polaczenie == i-1){
-                    graf[i].DL = waga;
-                }else if(polaczenie==i+1){
-                    graf[i].DP = waga;
-                }else if (polaczenie == i+x){
-                    graf[i].DD = waga;
-                }else if (polaczenie == i -x){
-                    graf[i].DG = waga;
-                }else{
-                    System.out.println("Nie właścoiwe połaczenmoie");
+                if(!graf.dodaj_droge(i, polaczenie, waga)){
+                    System.out.println("Niewłaściwe połączeie wieszchołków");
+                    return;
                 }
                 
             }/*
