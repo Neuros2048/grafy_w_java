@@ -94,10 +94,19 @@ public class Scena {
     private TextField YG2;
 
     @FXML
+    private ImageView puste_mejsce;
+    @FXML
     void Gen1W(ActionEvent event) {
-        System.out.println("dasdasfvcxxc");
+        try {
         this.y = Integer.valueOf(YG1.getText()) ;
         this.x = Integer.valueOf(XG1.getText());
+        Double.valueOf(MAXG1.getText());
+        Double.valueOf(MING1.getText());
+        } catch (java.lang.NumberFormatException e) {
+            //TODO: handle exception
+            return;
+        }
+        
         this.graf = new Graf();
         this.graf.dodaj_graf(x, y);
         generator.napisz(Double.valueOf(MAXG1.getText()), Double.valueOf(MING1.getText()), graf);
@@ -108,8 +117,15 @@ public class Scena {
 
     @FXML
     void Gen2W(ActionEvent event) {
+        try {
         this.y = Integer.valueOf(YG2.getText()) ;
         this.x = Integer.valueOf(XG2.getText());
+        Double.valueOf(MAXG1.getText());
+        Double.valueOf(MING2.getText());
+    } catch (java.lang.NumberFormatException e) {
+        //TODO: handle exception
+        return;
+    }
         generator.napisz(x,y, Double.valueOf(MAXG1.getText()), Double.valueOf(MING2.getText()), NAZWAG2.getText());
     }
     @FXML
@@ -226,6 +242,7 @@ public class Scena {
     @FXML
     void initialize() {
         assert zawartosc != null : "fx:id=\"zawartosc\" was not injected: check your FXML file 'Scena.fxml'.";
+        puste_mejsce.setImage(new Image(getClass().getResourceAsStream("Logo.png")));
         algorytm1 = new Fibonacci();
         algorytm2 = new Kolejka();
         generator = new Pisarz();

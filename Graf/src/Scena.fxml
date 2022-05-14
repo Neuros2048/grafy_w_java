@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="Calosc" prefHeight="563.0" prefWidth="1011.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Scena">
+<GridPane fx:id="Calosc" prefHeight="563.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Scena">
    <columnConstraints>
       <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="852.0" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="159.0" />
@@ -42,7 +42,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#plus" prefHeight="40.0" prefWidth="40.0" text="+" />
             <Button mnemonicParsing="false" onAction="#minus" prefHeight="40.0" prefWidth="40.0" text="-" />
-            <Label alignment="CENTER" prefHeight="27.0" prefWidth="291.0" text="Algorytm" />
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="291.0" text="Algorytmy" />
             <RadioButton fx:id="Lista" mnemonicParsing="false" onAction="#Wybur" text="Lista priorytetowa">
                <toggleGroup>
                   <ToggleGroup fx:id="algorytm" />
@@ -52,7 +52,6 @@
             <RadioButton fx:id="BFS" mnemonicParsing="false" onAction="#Wybur" text="BFS" toggleGroup="$algorytm" />
          </children>
       </VBox>
-      <BorderPane prefHeight="163.0" prefWidth="232.0" GridPane.columnIndex="1" />
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Z pliku">
@@ -61,7 +60,7 @@
                      <children>
                         <HBox prefHeight="40.0" prefWidth="852.0" spacing="15.0">
                            <children>
-                              <Label fx:id="Komunikator" alignment="CENTER" prefHeight="57.0" prefWidth="358.0" text="Label" textAlignment="CENTER" />
+                              <Label fx:id="Komunikator" alignment="CENTER" prefHeight="57.0" prefWidth="358.0" textAlignment="CENTER" />
                               <TextField fx:id="zawartosc" prefHeight="25.0" prefWidth="236.0" promptText="nazwa" />
                               <Button mnemonicParsing="false" onAction="#wcisnienty" prefHeight="25.0" prefWidth="114.0" text="Szukaj pliku" />
                            </children>
@@ -116,5 +115,14 @@
             </Tab>
         </tabs>
       </TabPane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+         <children>
+            <BorderPane prefHeight="97.0" prefWidth="131.0">
+               <center>
+                  <ImageView fx:id="puste_mejsce" fitHeight="79.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </Pane>
    </children>
 </GridPane>
