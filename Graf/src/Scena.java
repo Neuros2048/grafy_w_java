@@ -26,6 +26,8 @@ public class Scena {
     Widok wynik;
     Graf graf;
     Dijkstra algorytm1;
+    Dijkstra algorytm2;
+    Pisarz generator;
     
    
     @FXML
@@ -44,9 +46,6 @@ public class Scena {
     private Pane Plansza;
 
     @FXML
-    private Button Startdij;
-
-    @FXML
     private ToggleGroup algorytm;
 
     @FXML
@@ -61,6 +60,58 @@ public class Scena {
     @FXML
     private TextField zawartosc;
 
+    @FXML
+    private Button GEN1;
+
+    @FXML
+    private Button GEN2; 
+    
+    @FXML
+    private TextField MAXG1;
+
+    @FXML
+    private TextField MAXG2;
+
+    @FXML
+    private TextField MING1;
+
+    @FXML
+    private TextField MING2;
+
+    @FXML
+    private TextField NAZWAG2;
+
+    @FXML
+    private TextField XG1;
+
+    @FXML
+    private TextField XG2;
+
+    @FXML
+    private TextField YG1;
+
+    @FXML
+    private TextField YG2;
+
+    @FXML
+    void Gen1W(ActionEvent event) {
+        System.out.println("dasdasfvcxxc");
+        this.y = Integer.valueOf(YG1.getText()) ;
+        this.x = Integer.valueOf(XG1.getText());
+        this.graf = new Graf();
+        this.graf.dodaj_graf(x, y);
+        generator.napisz(Double.valueOf(MAXG1.getText()), Double.valueOf(MING1.getText()), graf);
+        wygeneruj_obraz();
+        algorytm1.dodaj_dane(graf);
+        algorytm2.dodaj_dane(graf);
+    }
+
+    @FXML
+    void Gen2W(ActionEvent event) {
+        this.y = Integer.valueOf(YG2.getText()) ;
+        this.x = Integer.valueOf(XG2.getText());
+        generator.napisz(x,y, Double.valueOf(MAXG1.getText()), Double.valueOf(MING2.getText()), NAZWAG2.getText());
+    }
     @FXML
     void clikniencie(MouseEvent event) {
         
@@ -102,6 +153,8 @@ public class Scena {
             ktury_algorytm = 1;
         }else if(Fibo.isSelected()){
             ktury_algorytm = 0;
+        }else{
+            ktury_algorytm = 2;
         }
     }
     @FXML
@@ -111,56 +164,20 @@ public class Scena {
         if(plik.dodaj_plik("Graf/Pliki_textowe/"+zawartosc.getText())){
             Komunikator.setText("Udało się odczytać plik");
             this.dane_pliku = plik;
+            this.y = dane_pliku.czytaj_int();
+            this.x = dane_pliku.czytaj_int();
+            this.graf = new Graf();
+            this.graf.dodaj_graf(x, y);
+            dane_pliku.wypelnij(graf, x,y);
+            wygeneruj_obraz();
+            algorytm1.dodaj_dane(graf);
+            algorytm2.dodaj_dane(graf);
         }else{
             Komunikator.setText("Nie udało się odczytać pliku");
         }
         
 
-    }
-    private void znajdz_wieszcholek(double x,double y,boolean prawy_lewy){
-        int pozycja_x;
-        int pozycja_y;
-        pozycja_x = (int) Math.floor(x/(this.Fitszetokosc*this.Scala/this.x));
-        pozycja_y = (int) Math.floor(y/(this.Fitwysokosc*this.Scala/this.y));
-        if (prawy_lewy){
-            graf.zeruj_dane();
-            algorytm1.rozwiarz(pozycja_x+pozycja_y*this.x);
-            this.wynik.pomaluj();
-        }else {
-            graf.okresl_scieszke(pozycja_x+pozycja_y*this.x);
-            this.wynik.pomaluj_wynik();
-        }
-        return ;
-    }
-    @FXML
-    void Startdij(ActionEvent event) {
-        this.y = dane_pliku.czytaj_int();
-        this.x = dane_pliku.czytaj_int();
-        this.graf = new Graf();
-        this.graf.dodaj_graf(x, y);
-        
-        
-        dane_pliku.wypelnij(graf, x,y);
-        
-        //Dijkstra algorytm = new Dijkstra(graf, x);
-        if (ktury_algorytm == 0){
-            algorytm1 = new Fibonacci();
-        }else{
-            algorytm1 = new Kolejka();
-        }
-        
-        algorytm1.dodaj_dane(graf);
-        //if(algorytm.czy_istnieje(poczontek, szukane, x*y)){
-           // System.out.println("Nie ma połaczenia miedzy elementami");
-           // return;
-        //}
-        /*for (i=0;i<x*y;i++){
-            System.out.println(graf[i].waga);
-        }*/
-        //algorytm1.okresl_scieszke(szukane);
-        //new Obraz(x,y,graf);
-        //Pisarz generator = new Pisarz();
-        //generator.napisz(x, y);
+    }private void wygeneruj_obraz(){
         int rozmiar = 8;
         int Dx= (int) Math.round(pole.getWidth());
         int Dy= (int) Math.round(pole.getHeight());
@@ -183,58 +200,35 @@ public class Scena {
         Fitwysokosc = obraz.getFitHeight();
         Fitszetokosc = obraz.getFitWidth();
     }
+    private void znajdz_wieszcholek(double x,double y,boolean prawy_lewy){
+        int pozycja_x;
+        int pozycja_y;
+        pozycja_x = (int) Math.floor(x/(this.Fitszetokosc*this.Scala/this.x));
+        pozycja_y = (int) Math.floor(y/(this.Fitwysokosc*this.Scala/this.y));
+        if (prawy_lewy){
+            graf.zeruj_dane();
+            if(ktury_algorytm == 0){
+                algorytm1.rozwiarz(pozycja_x+pozycja_y*this.x);
+            }else if(ktury_algorytm == 1){
+                algorytm2.rozwiarz(pozycja_x+pozycja_y*this.x);
+            }else if(ktury_algorytm == 2){
+                algorytm1.BFS(pozycja_x+pozycja_y*this.x);
+            }
+            
+            this.wynik.pomaluj();
+        }else {
+            graf.okresl_scieszke(pozycja_x+pozycja_y*this.x);
+            this.wynik.pomaluj_wynik();
+        }
+        return ;
+    }
+    
     @FXML
     void initialize() {
         assert zawartosc != null : "fx:id=\"zawartosc\" was not injected: check your FXML file 'Scena.fxml'.";
-        /*
-        String [] dane_wejsciowe = new String[3];
-        dane_wejsciowe[0]="Graf/Pliki_textowe/javatest.txt";
-        dane_wejsciowe[1]="10000";
-        dane_wejsciowe[2]="7000";
-        int poczontek = Integer.parseInt(dane_wejsciowe[1]);
-        int szukane = Integer.parseInt(dane_wejsciowe[2]);
-        //Czytacz dane_pliku = new Czytacz(new File("mygraph.txt"));
-        int x,y;
-        
-        y = dane_pliku.czytaj_int();
-        x = dane_pliku.czytaj_int();
-        System.out.println(y +" i "+ x);
-        Wieszcholek[] graf = new Wieszcholek[x*y];
-        
-        int i;
-        for (i=0;i<x*y;i++){
-            graf[i] = new Wieszcholek();
-        }
-        dane_pliku.wypelnij(graf, x,y);
-        //Dijkstra algorytm = new Dijkstra(graf, x);
-        Dijkstra algorytm1 = new Fibonacci();
-        algorytm1.dodaj_dane(graf, x);
-        //if(algorytm.czy_istnieje(poczontek, szukane, x*y)){
-           // System.out.println("Nie ma połaczenia miedzy elementami");
-           // return;
-        //}
-        System.out.println("start");
-        Long times = System.currentTimeMillis();
-        algorytm1.rozwiarz(poczontek);
-        Long timek = System.currentTimeMillis() - times;
-        System.out.println(timek);
-        /*for (i=0;i<x*y;i++){
-            System.out.println(graf[i].waga);
-        }
-        algorytm1.okresl_scieszke(szukane);
-        System.out.println(graf[szukane].waga);
-        //new Obraz(x,y,graf);
-        //Pisarz generator = new Pisarz("plikawypisany1.txt");
-        //generator.napisz(x, y);
-        int Dx=16000;
-        int Dy=10000;
-        Widok wynik =  new Widok(x, y, graf, Dx, Dy);
-        Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
-        obraz.setFitHeight(Dx);
-        obraz.setFitWidth(Dy);
-        obraz.setImage( toczos);
-        Fitwysokosc = obraz.getFitHeight();
-        Fitszetokosc = obraz.getFitWidth();*/
+        algorytm1 = new Fibonacci();
+        algorytm2 = new Kolejka();
+        generator = new Pisarz();
     }
 
 }

@@ -74,6 +74,7 @@ public abstract class Dijkstra {
                         break;
                     if (graf.dostan_status(xdo)==0){
                         graf.ustaw_status(xdo, 2);
+                        graf.ustaw_wage(xdo, startx, 1);
                         list.add(xdo);
                         wpentli++;
                     }
