@@ -73,6 +73,12 @@ public class Graf{
     *@return true-udalo się false-nieprawidłowe parametry i lub iz
     */
     public boolean dodaj_droge(int i,int iz, double waga ){
+        if(i<0||iz<0||i>x*y-1||iz>x*y-1){
+            return false;
+        }
+        if(waga <0){
+            return false;
+        }
         if (iz == i-1 && i%x != 0 ){
             wieszcholki[i].DL = waga;
         }else if(iz == i+1 && i%x != x-1 ){

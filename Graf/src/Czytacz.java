@@ -1,15 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.Scanner;
-
 import algorytmy.Graf;
 
-
 public class Czytacz  {
-    Scanner skan;
-    Scanner skanlini;
-    FileReader czytaj;
+    private Scanner skan;
+    private Scanner skanlini;
     
     public boolean dodaj_plik(String File_name){
         Scanner skan;
@@ -42,6 +38,10 @@ public class Czytacz  {
             while (skanlini.hasNextInt()){
                 polaczenie = skanlini.nextInt();
                 c = skanlini.next();
+                if (c==":"){
+                    System.out.println("Niewłaściwy format pliku");
+                    return ;
+                }
                 waga = Double.parseDouble(c.substring(1));
                 if(waga < 0 ){
                     System.out.println("Waga drogi nie możebyć ujemna a ma wartośc "+waga);
@@ -52,6 +52,10 @@ public class Czytacz  {
                     return;
                 }
                 
+            }
+            if (skanlini.hasNext()){
+                System.out.println("Niewłaściwy format pliku 2");
+                return;
             }
             
         }

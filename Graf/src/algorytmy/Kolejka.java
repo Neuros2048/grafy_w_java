@@ -81,7 +81,7 @@ public class Kolejka extends Dijkstra{
         }
         return tymczasowy;
     }
-    public void przetasuj(Lista zmieniony){
+    private void przetasuj(Lista zmieniony){
         if (start==zmieniony){
             return;
         }
@@ -106,7 +106,7 @@ public class Kolejka extends Dijkstra{
         }
         
     }
-    public Lista znajc_klucz(int klucz){
+    private Lista znajc_klucz(int klucz){
         Lista tymczasowy = start;
         while(tymczasowy.klucz!=klucz){
             tymczasowy = tymczasowy.nastepny;

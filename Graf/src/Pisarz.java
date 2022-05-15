@@ -55,16 +55,16 @@ public class Pisarz {
         for (i = 0; i < y; i++) {
 			for (ii = 0; ii < x; ii++) {
 				if ((ii + 1) < x){
-                    graf.dodaj_droge(ii + i * x, ii + i * x + 1, losowa.nextDouble()*max+min);
+                    graf.dodaj_droge(ii + i * x, ii + i * x + 1, losowa.nextDouble()*(max-min)+min);
                 }
 				if ((i + 1) < y){
-                    graf.dodaj_droge(ii + i * x, ii + i * x + x, losowa.nextDouble()*max+min);
+                    graf.dodaj_droge(ii + i * x, ii + i * x + x, losowa.nextDouble()*(max-min)+min);
                 }
 				if ((ii - 1) > -1){
-                    graf.dodaj_droge(ii + i * x, ii + i * x - 1, losowa.nextDouble()*max+min);
+                    graf.dodaj_droge(ii + i * x, ii + i * x - 1, losowa.nextDouble()*(max-min)+min);
                 }
 				if ((i - 1) > -1){
-                    graf.dodaj_droge(ii + i * x, ii + i * x - x, losowa.nextDouble()*max+min);
+                    graf.dodaj_droge(ii + i * x, ii + i * x - x, losowa.nextDouble()*(max-min)+min);
                 }
 			}
 		}
