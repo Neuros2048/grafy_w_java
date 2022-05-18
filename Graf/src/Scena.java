@@ -103,13 +103,12 @@ public class Scena {
         Double.valueOf(MAXG1.getText());
         Double.valueOf(MING1.getText());
         } catch (java.lang.NumberFormatException e) {
-            //TODO: handle exception
-            return;
         }
         
         this.graf = new Graf();
         this.graf.dodaj_graf(x, y);
         generator.napisz(Double.valueOf(MAXG1.getText()), Double.valueOf(MING1.getText()), graf);
+        Scala = 1;
         wygeneruj_obraz();
         algorytm1.dodaj_dane(graf);
         algorytm2.dodaj_dane(graf);
@@ -123,7 +122,6 @@ public class Scena {
         Double.valueOf(MAXG1.getText());
         Double.valueOf(MING2.getText());
     } catch (java.lang.NumberFormatException e) {
-        //TODO: handle exception
         return;
     }
         generator.napisz(x,y, Double.valueOf(MAXG1.getText()), Double.valueOf(MING2.getText()), NAZWAG2.getText());
@@ -185,6 +183,7 @@ public class Scena {
             this.graf = new Graf();
             this.graf.dodaj_graf(x, y);
             dane_pliku.wypelnij(graf, x,y);
+            Scala = 1;
             wygeneruj_obraz();
             algorytm1.dodaj_dane(graf);
             algorytm2.dodaj_dane(graf);

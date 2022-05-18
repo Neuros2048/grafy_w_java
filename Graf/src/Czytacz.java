@@ -13,7 +13,6 @@ public class Czytacz  {
             skan = new Scanner(new File(File_name));
             
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             return false;
         }
         this.skan = skan;

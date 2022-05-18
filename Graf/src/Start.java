@@ -19,7 +19,7 @@ public class Start extends Application {
         try {
         Parent root = null;
         root = FXMLLoader.load(getClass().getResource("Scena.fxml"));
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("GRAFEN");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("Logo.png")));
         primaryStage.show();

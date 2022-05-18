@@ -15,7 +15,6 @@ public class Pisarz {
         try {
             pioro = new FileWriter(nazwa);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return;
         }
@@ -43,7 +42,6 @@ public class Pisarz {
 		}
         pioro.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
