@@ -2,9 +2,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import algorytmy.Algorymt_przechodzenia;
+import algorytmy.BFS;
 import algorytmy.Dijkstra;
 import algorytmy.Fibonacci;
 import algorytmy.Graf;
+import algorytmy.Kolejka;
 
 public class Testy {
     @Test
@@ -71,6 +74,24 @@ public class Testy {
         assertEquals(17.324, graf.dostan_waga(4));
     }
     @Test
+    public void Test_Algorytmu_przechodzenia_BFS(){
+        Algorymt_przechodzenia algorytm = new BFS();
+        Graf graf = new Graf();
+        graf.dodaj_graf(4, 4);
+        for(int i = 0;i <4;i++){
+            for(int j = 0;j<4;j++ ){
+                graf.dodaj_droge( i+j*4, i+1+j*4,i+1+j*4);
+                graf.dodaj_droge( i+j*4,i-1+j*4, i+1+j*4);
+                graf.dodaj_droge( i+j*4, i+4+j*4,i+1+j*4);
+                graf.dodaj_droge( i+j*4,i-4+j*4, i+1+j*4);
+            }
+        }
+        algorytm.dodaj_dane(graf);
+        algorytm.rozwiarz(0);
+        assertEquals(1, graf.dostan_waga(1));
+        assertEquals(6, graf.dostan_waga(15));
+    }
+    @Test
     public void Test_Dijkstry_Fibonacci_(){
         Dijkstra algorytm = new Fibonacci();
         Graf graf = new Graf();
@@ -88,9 +109,23 @@ public class Testy {
         assertEquals(1, graf.dostan_waga(1));
         assertEquals(30, graf.dostan_waga(15));
 
-        graf.zeruj_dane();
-        //algorytm.BFS(0);
-        //assertEquals(6, graf.dostan_waga(15));
+    }@Test
+    public void Test_Dijkstry_Kolejki_(){
+        Dijkstra algorytm = new Kolejka();
+        Graf graf = new Graf();
+        graf.dodaj_graf(4, 4);
+        for(int i = 0;i <4;i++){
+            for(int j = 0;j<4;j++ ){
+                graf.dodaj_droge( i+j*4, i+1+j*4,i+1+j*4);
+                graf.dodaj_droge( i+j*4,i-1+j*4, i+1+j*4);
+                graf.dodaj_droge( i+j*4, i+4+j*4,i+1+j*4);
+                graf.dodaj_droge( i+j*4,i-4+j*4, i+1+j*4);
+            }
+        }
+        algorytm.dodaj_dane(graf);
+        algorytm.rozwiarz(0);
+        assertEquals(1, graf.dostan_waga(1));
+        assertEquals(30, graf.dostan_waga(15));
     }
     @Test
     public void Test_Pisarz_(){
