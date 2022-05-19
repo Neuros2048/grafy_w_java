@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import algorytmy.Algorymt_przechodzenia;
+import algorytmy.Algorytm_przechodzenia;
 import algorytmy.BFS;
 import algorytmy.Dijkstra;
 import algorytmy.Fibonacci;
@@ -75,7 +75,7 @@ public class Testy {
     }
     @Test
     public void Test_Algorytmu_przechodzenia_BFS(){
-        Algorymt_przechodzenia algorytm = new BFS();
+        Algorytm_przechodzenia algorytm = new BFS();
         Graf graf = new Graf();
         graf.dodaj_graf(4, 4);
         for(int i = 0;i <4;i++){

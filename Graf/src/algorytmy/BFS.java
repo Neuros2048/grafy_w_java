@@ -2,7 +2,7 @@ package algorytmy;
 
 import java.util.ArrayList;
 
-public class BFS extends Algorymt_przechodzenia{
+public class BFS extends Algorytm_przechodzenia{
     private ArrayList<Integer> lista;
     @Override
     protected void stworzenie(int poczontek) {

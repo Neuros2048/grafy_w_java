@@ -1,6 +1,6 @@
 package algorytmy;
 
-public abstract class Algorymt_przechodzenia {
+public abstract class Algorytm_przechodzenia {
     protected Graf graf;
     protected int x;
     public void dodaj_dane(Graf graf){

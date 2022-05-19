@@ -25,108 +25,110 @@ public class Scena {
     int x,y;
     Widok wynik;
     Graf graf;
-    Algorymt_przechodzenia algorytm1;
-    Algorymt_przechodzenia algorytm2;
-    Algorymt_przechodzenia algorytm3;
+    Algorytm_przechodzenia algorytm1;
+    Algorytm_przechodzenia algorytm2;
+    Algorytm_przechodzenia algorytm3;
     Pisarz generator;
     
    
     @FXML
     private GridPane Calosc;
-
     @FXML
     private RadioButton Fibo;
-
     @FXML
     private Label Komunikator;
-
+    @FXML
+    private Label KomunikatorGen;
+    @FXML
+    private Label KomunikatorZap;
     @FXML
     private RadioButton Lista;
-
     @FXML
     private Pane Plansza;
-
     @FXML
     private ToggleGroup algorytm;
-
     @FXML
     private ImageView obraz;
-
     @FXML
     private RadioButton poczatek;
-
     @FXML
     private ScrollPane pole;
-
     @FXML
     private TextField zawartosc;
-
     @FXML
     private Button GEN1;
-
     @FXML
     private Button GEN2; 
-    
     @FXML
     private TextField MAXG1;
-
     @FXML
     private TextField MAXG2;
-
     @FXML
     private TextField MING1;
-
     @FXML
     private TextField MING2;
-
     @FXML
     private TextField NAZWAG2;
-
     @FXML
     private TextField XG1;
-
     @FXML
     private TextField XG2;
-
     @FXML
     private TextField YG1;
-
     @FXML
     private TextField YG2;
-
     @FXML
     private ImageView puste_mejsce;
     @FXML
     void Gen1W(ActionEvent event) {
+        double max;
+        double min;
         try {
         this.y = Integer.valueOf(YG1.getText()) ;
         this.x = Integer.valueOf(XG1.getText());
-        Double.valueOf(MAXG1.getText());
-        Double.valueOf(MING1.getText());
+        max = Double.valueOf(MAXG1.getText());
+        min = Double.valueOf(MING1.getText());
         } catch (java.lang.NumberFormatException e) {
+            KomunikatorGen.setText("Podane wartości nie są liczbami");
+            return;
         }
-        
+        if(this.x<1 || this.y <1 || max < min ){
+            KomunikatorGen.setText("Podana wartości są nieodpowiednie");
+            return;
+        }
         this.graf = new Graf();
         this.graf.dodaj_graf(x, y);
-        generator.napisz(Double.valueOf(MAXG1.getText()), Double.valueOf(MING1.getText()), graf);
+        generator.napisz(max, min, graf);
         Scala = 1;
         wygeneruj_obraz();
         algorytm1.dodaj_dane(graf);
         algorytm2.dodaj_dane(graf);
         algorytm3.dodaj_dane(graf);
+        KomunikatorGen.setText("Udało się wygenerować graf");
     }
 
     @FXML
     void Gen2W(ActionEvent event) {
+        double max;
+        double min;
         try {
         this.y = Integer.valueOf(YG2.getText()) ;
         this.x = Integer.valueOf(XG2.getText());
-        Double.valueOf(MAXG1.getText());
-        Double.valueOf(MING2.getText());
-    } catch (java.lang.NumberFormatException e) {
-        return;
-    }
-        generator.napisz(x,y, Double.valueOf(MAXG1.getText()), Double.valueOf(MING2.getText()), NAZWAG2.getText());
+        max = Double.valueOf(MAXG2.getText());
+        min = Double.valueOf(MING2.getText());
+        } catch (java.lang.NumberFormatException e) {
+            KomunikatorZap.setText("Podane wartości nie są liczbami");
+            return;
+        }
+        if(this.x<1 || this.y <1 || max < min ){
+            KomunikatorGen.setText("Podana wartości są nieodpowiednie");
+            return;
+        }
+        if(generator.napisz(x,y, max, min,"Graf/Pliki_textowe/"+NAZWAG2.getText())){
+            KomunikatorZap.setText("Udało się wygenerować plik");
+            return;
+        }
+        KomunikatorZap.setText("Nie udało się wygenerować pliku");
     }
     @FXML
     void clikniencie(MouseEvent event) {

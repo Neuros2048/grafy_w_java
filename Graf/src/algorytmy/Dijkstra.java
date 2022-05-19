@@ -1,6 +1,6 @@
 package algorytmy;
 
-public abstract class Dijkstra extends Algorymt_przechodzenia {
+public abstract class Dijkstra extends Algorytm_przechodzenia {
     protected abstract int get_min();
     protected abstract void zdejmij_min();
     protected abstract void zmien_wage(int xdo);

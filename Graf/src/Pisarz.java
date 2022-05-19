@@ -10,13 +10,12 @@ public class Pisarz {
     }/**
     *Pisze graf do pliku
      */
-    public void napisz(int x, int y,double max,double min,String nazwa){
+    public boolean napisz(int x, int y,double max,double min,String nazwa){
         FileWriter pioro;
         try {
             pioro = new FileWriter(nazwa);
         } catch (IOException e) {
-            e.printStackTrace();
-            return;
+            return false;
         }
         int i,ii;
         Random losowa =new Random();
@@ -42,8 +41,9 @@ public class Pisarz {
 		}
         pioro.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            return false;
         }
+        return true;
     }
     public void napisz(double max,double min,Graf graf){
         int x = graf.dostan_wymiar_x();

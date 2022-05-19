@@ -60,7 +60,7 @@
                      <children>
                         <HBox prefHeight="40.0" prefWidth="852.0" spacing="15.0">
                            <children>
-                              <Label fx:id="Komunikator" alignment="CENTER" prefHeight="57.0" prefWidth="358.0" textAlignment="CENTER" />
+                              <Label fx:id="Komunikator" alignment="CENTER" prefHeight="25.0" prefWidth="358.0" textAlignment="CENTER" />
                               <TextField fx:id="zawartosc" prefHeight="25.0" prefWidth="236.0" promptText="nazwa" />
                               <Button mnemonicParsing="false" onAction="#wcisnienty" prefHeight="25.0" prefWidth="114.0" text="Szukaj pliku" />
                            </children>
@@ -78,10 +78,11 @@
                      <children>
                         <HBox layoutX="-4.0" layoutY="18.0" prefHeight="40.0" prefWidth="852.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TextField fx:id="XG1" promptText="wymiar X" />
-                              <TextField fx:id="YG1" promptText="wymiar Y" />
-                              <TextField fx:id="MING1" promptText="min" />
-                              <TextField fx:id="MAXG1" promptText="max" />
+                              <Label fx:id="KomunikatorGen" alignment="CENTER" prefHeight="26.0" prefWidth="200.0" textAlignment="CENTER" />
+                              <TextField fx:id="XG1" prefHeight="25.0" prefWidth="100.0" promptText="wymiar X" />
+                              <TextField fx:id="YG1" prefHeight="25.0" prefWidth="100.0" promptText="wymiar Y" />
+                              <TextField fx:id="MING1" prefHeight="25.0" prefWidth="100.0" promptText="min" />
+                              <TextField fx:id="MAXG1" prefHeight="25.0" prefWidth="100.0" promptText="max" />
                               <Button fx:id="GEN1" mnemonicParsing="false" onAction="#Gen1W" prefHeight="25.0" prefWidth="79.0" text="Generuj" />
                            </children>
                            <padding>
@@ -98,11 +99,12 @@
                      <children>
                         <HBox prefHeight="40.0" prefWidth="852.0" spacing="15.0">
                            <children>
-                              <TextField fx:id="NAZWAG2" promptText="nazwa" />
-                              <TextField fx:id="XG2" prefHeight="25.0" prefWidth="122.0" promptText="wymiar X" />
-                              <TextField fx:id="YG2" prefHeight="25.0" prefWidth="122.0" promptText="wymiar Y" />
-                              <TextField fx:id="MING2" prefHeight="25.0" prefWidth="122.0" promptText="min" />
-                              <TextField fx:id="MAXG2" prefHeight="25.0" prefWidth="122.0" promptText="max" />
+                              <Label fx:id="KomunikatorZap" alignment="CENTER" prefHeight="25.0" prefWidth="175.0" textAlignment="CENTER" />
+                              <TextField fx:id="NAZWAG2" prefHeight="25.0" prefWidth="110.0" promptText="nazwa" />
+                              <TextField fx:id="XG2" prefHeight="25.0" prefWidth="80.0" promptText="wymiar X" />
+                              <TextField fx:id="YG2" prefHeight="25.0" prefWidth="80.0" promptText="wymiar Y" />
+                              <TextField fx:id="MING2" prefHeight="25.0" prefWidth="80.0" promptText="min" />
+                              <TextField fx:id="MAXG2" prefHeight="25.0" prefWidth="80.0" promptText="max" />
                               <Button fx:id="GEN2" mnemonicParsing="false" onAction="#Gen2W" prefHeight="25.0" prefWidth="79.0" text="Generuj" />
                            </children>
                            <padding>
