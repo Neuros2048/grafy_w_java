@@ -17,7 +17,7 @@ public class BFS extends Algorymt_przechodzenia{
     }
 
     @Override
-    protected void nowy_wieszcholek(int xdo, int startx) {
+    protected void nowy_wieszcholek(int xdo, int startx, int od_1_do_4) {
         graf.ustaw_status(xdo, 2);
         graf.ustaw_wage(xdo, startx, 1);
         lista.add(xdo);
@@ -25,12 +25,12 @@ public class BFS extends Algorymt_przechodzenia{
     }
 
     @Override
-    protected boolean ponowien_odwiedzic(int xdo, int startx) {
+    protected boolean ponowien_odwiedzic(int xdo, int startx, int od_1_do_4) {
         return false;
     }
 
     @Override
-    protected void ponownie_odwiedony(int xdo, int startx) {
+    protected void ponownie_odwiedony(int xdo, int startx, int od_1_do_4) {
         return;
     }
     
