@@ -29,7 +29,8 @@ public class Scena {
     Algorytm_przechodzenia algorytm2;
     Algorytm_przechodzenia algorytm3;
     Pisarz generator;
-    
+    int rozmiar;
+    boolean wygenerowany;
    
     @FXML
     private GridPane Calosc;
@@ -49,6 +50,8 @@ public class Scena {
     private ToggleGroup algorytm;
     @FXML
     private ImageView obraz;
+    @FXML
+    private ImageView kolory;
     @FXML
     private RadioButton poczatek;
     @FXML
@@ -132,7 +135,9 @@ public class Scena {
     }
     @FXML
     void clikniencie(MouseEvent event) {
-        
+        if(!wygenerowany){
+            return;
+        }
         boolean prawy_lewy;
         if(event.getButton() == MouseButton.PRIMARY){
             prawy_lewy = true;
@@ -198,7 +203,7 @@ public class Scena {
         
 
     }private void wygeneruj_obraz(){
-        int rozmiar = 8;
+        rozmiar = 8;
         int Dx= (int) Math.round(pole.getWidth());
         int Dy= (int) Math.round(pole.getHeight());
         if (Dx < rozmiar*x*3/2){
@@ -207,8 +212,6 @@ public class Scena {
         if (Dy < rozmiar*y*3/2){
             Dy = rozmiar*y*3/2;
         }
-        
-        wynik =  new Widok();
         wynik.Stworz_widok(graf, Dx, Dy, rozmiar);
         Image toczos = SwingFXUtils.toFXImage(wynik.pomalowane(), null);
         obraz.setFitHeight(Dy);
@@ -219,12 +222,13 @@ public class Scena {
         obraz.setImage(toczos);
         Fitwysokosc = obraz.getFitHeight();
         Fitszetokosc = obraz.getFitWidth();
+        wygenerowany = true;
     }
     private void znajdz_wieszcholek(double x,double y,boolean prawy_lewy){
         int pozycja_x;
         int pozycja_y;
-        pozycja_x = (int) Math.floor(x/(this.Fitszetokosc*this.Scala/this.x));
-        pozycja_y = (int) Math.floor(y/(this.Fitwysokosc*this.Scala/this.y));
+        pozycja_x = (int) Math.floor((x)/(this.Fitszetokosc*this.Scala/this.x));
+        pozycja_y = (int) Math.floor((y)/(this.Fitwysokosc*this.Scala/this.y));
         if (prawy_lewy){
             graf.zeruj_dane();
             if(ktury_algorytm == 0){
@@ -251,6 +255,9 @@ public class Scena {
         algorytm2 = new Kolejka();
         algorytm3 = new BFS();
         generator = new Pisarz();
+        wynik =  new Widok();
+        wygenerowany = false;
+        kolory.setImage(SwingFXUtils.toFXImage(wynik.widok_skali(),null));
     }
 
 }

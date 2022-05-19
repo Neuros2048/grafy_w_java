@@ -7,15 +7,15 @@ import algorytmy.Graf;
 
 public class Widok { //extends JPanel{
     
-    int x;
-    int y;
-    int rozmiar;
-    int Dx;
-    int Dy;
-    double max; //max całkowitej drogi
-    double maxw; // max pojedycznej drogi
-    double minw; // min pojedynczej drogi
-    BufferedImage obrazek;
+    private int x;
+    private int y;
+    private int rozmiar;
+    private int Dx;
+    private int Dy;
+    private double max; //max całkowitej drogi
+    private double maxw; // max pojedycznej drogi
+    private double minw; // min pojedynczej drogi
+    private  BufferedImage obrazek;
     Graf graf;
     public Widok(){
         
@@ -219,5 +219,16 @@ public class Widok { //extends JPanel{
             }
         }
 
+    }
+    public BufferedImage widok_skali(){
+        BufferedImage skala = new BufferedImage(300,600,BufferedImage.TYPE_INT_RGB );
+        Graphics2D g2D = skala.createGraphics();
+        this.max = 599;
+        g2D.setStroke(new BasicStroke(1));
+        for(int i = 0; i <600;i++){
+            g2D.setColor(tecza(i));
+            g2D.drawLine(0, i, 300, i);
+        }
+        return skala;
     }
 }

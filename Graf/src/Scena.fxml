@@ -50,6 +50,7 @@
             </RadioButton>
             <RadioButton fx:id="Fibo" mnemonicParsing="false" onAction="#Wybur" selected="true" text="Fibonacci heap" toggleGroup="$algorytm" />
             <RadioButton fx:id="BFS" mnemonicParsing="false" onAction="#Wybur" text="BFS" toggleGroup="$algorytm" />
+            <ImageView fx:id="kolory" fitHeight="313.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </VBox>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
