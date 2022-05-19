@@ -21,12 +21,12 @@
 
 <GridPane fx:id="Calosc" prefHeight="563.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Scena">
    <columnConstraints>
-      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="852.0" />
-      <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="159.0" />
+      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" prefWidth="852.0" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="159.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="87.0" vgrow="ALWAYS" />
-      <RowConstraints minHeight="10.0" prefHeight="476.0" valignment="BOTTOM" vgrow="ALWAYS" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="87.0" vgrow="ALWAYS" />
+      <RowConstraints prefHeight="476.0" valignment="BOTTOM" vgrow="ALWAYS" />
    </rowConstraints>
    <children>
       <ScrollPane fx:id="pole" prefHeight="971.0" prefWidth="1373.0" scaleShape="false" GridPane.rowIndex="1">
