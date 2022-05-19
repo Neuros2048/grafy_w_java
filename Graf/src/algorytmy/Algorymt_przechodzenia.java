@@ -9,9 +9,9 @@ public abstract class Algorymt_przechodzenia {
     }
     protected abstract void stworzenie(int poczontek);
     protected abstract int nastepny();
-    protected abstract void nowy_wieszcholek(int xdo, int startx);
-    protected abstract boolean ponowien_odwiedzic(int xdo, int startx);
-    protected abstract void ponownie_odwiedony(int xdo, int startx);
+    protected abstract void nowy_wierzcholek(int xdo, int startx, int od_1_do_4);
+    protected abstract boolean ponowien_odwiedzic(int xdo, int startx, int od_1_do_4);
+    protected abstract void ponownie_odwiedzony(int xdo, int startx, int od_1_do_4 );
     public void rozwiarz(int poczontek){
         stworzenie(poczontek);
         int wpentli = 1;
@@ -33,10 +33,10 @@ public abstract class Algorymt_przechodzenia {
                     else
                         break;
                     if (graf.dostan_status(xdo)==0){
-                        nowy_wieszcholek(xdo,startx);
+                        nowy_wierzcholek(xdo,startx, od_1_do_4);
                         wpentli++;
                     }else if(graf.dostan_status(xdo)==1&&graf.dostan_waga(xdo) >graf.dostan_waga(startx)+graf.dostan_droge(startx, od_1_do_4)){
-                        ponownie_odwiedony(xdo, startx);
+                        ponownie_odwiedzony(xdo, startx, od_1_do_4);
                     }
                 }
             }

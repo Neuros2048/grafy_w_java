@@ -7,6 +7,7 @@ public class BFS extends Algorymt_przechodzenia{
     @Override
     protected void stworzenie(int poczontek) {
         lista = new ArrayList<>();
+        lista.add(poczontek);
     }
 
     @Override
@@ -17,7 +18,7 @@ public class BFS extends Algorymt_przechodzenia{
     }
 
     @Override
-    protected void nowy_wieszcholek(int xdo, int startx, int od_1_do_4) {
+    protected void nowy_wierzcholek(int xdo, int startx, int od_1_do_4) {
         graf.ustaw_status(xdo, 2);
         graf.ustaw_wage(xdo, startx, 1);
         lista.add(xdo);
@@ -30,7 +31,7 @@ public class BFS extends Algorymt_przechodzenia{
     }
 
     @Override
-    protected void ponownie_odwiedony(int xdo, int startx, int od_1_do_4) {
+    protected void ponownie_odwiedzony(int xdo, int startx, int od_1_do_4) {
         return;
     }
     

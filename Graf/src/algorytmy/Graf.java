@@ -1,9 +1,9 @@
 package algorytmy;
 
 public class Graf{
-    private Wieszcholek [] wieszcholki;
+    private Wierzcholek [] wieszcholki;
     private int x,y; 
-    private class Wieszcholek {
+    private class Wierzcholek {
         public int z ;
         public int status;
         public double waga;
@@ -11,7 +11,7 @@ public class Graf{
         public double DP;
         public double DG;
         public double DD;
-            Wieszcholek(){
+            Wierzcholek(){
                 this.z = -2;
                 this.status = 0;
                 this.waga = 0 ;
@@ -31,9 +31,9 @@ public class Graf{
         this.x = x;
         this.y = y;
         int i;
-        this.wieszcholki = new Wieszcholek[x*y];
+        this.wieszcholki = new Wierzcholek[x*y];
         for (i=0;i<x*y;i++){
-            wieszcholki[i] = new Wieszcholek();
+            wieszcholki[i] = new Wierzcholek();
         }
     }
     public int dlugosc_grafu(){

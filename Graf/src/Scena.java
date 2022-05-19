@@ -25,8 +25,9 @@ public class Scena {
     int x,y;
     Widok wynik;
     Graf graf;
-    Dijkstra algorytm1;
-    Dijkstra algorytm2;
+    Algorymt_przechodzenia algorytm1;
+    Algorymt_przechodzenia algorytm2;
+    Algorymt_przechodzenia algorytm3;
     Pisarz generator;
     
    
@@ -112,6 +113,7 @@ public class Scena {
         wygeneruj_obraz();
         algorytm1.dodaj_dane(graf);
         algorytm2.dodaj_dane(graf);
+        algorytm3.dodaj_dane(graf);
     }
 
     @FXML
@@ -187,6 +189,7 @@ public class Scena {
             wygeneruj_obraz();
             algorytm1.dodaj_dane(graf);
             algorytm2.dodaj_dane(graf);
+            algorytm3.dodaj_dane(graf);
         }else{
             Komunikator.setText("Nie udało się odczytać pliku");
         }
@@ -227,7 +230,7 @@ public class Scena {
             }else if(ktury_algorytm == 1){
                 algorytm2.rozwiarz(pozycja_x+pozycja_y*this.x);
             }else if(ktury_algorytm == 2){
-                algorytm1.BFS(pozycja_x+pozycja_y*this.x);
+                algorytm3.rozwiarz(pozycja_x+pozycja_y*this.x);
             }
             
             this.wynik.pomaluj();
@@ -244,6 +247,7 @@ public class Scena {
         puste_mejsce.setImage(new Image(getClass().getResourceAsStream("Logo.png")));
         algorytm1 = new Fibonacci();
         algorytm2 = new Kolejka();
+        algorytm3 = new BFS();
         generator = new Pisarz();
     }
 
