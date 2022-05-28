@@ -95,7 +95,7 @@ public class Scena {
             KomunikatorGen.setText("Podane wartości nie są liczbami");
             return;
         }
-        if(this.x<1 || this.y <1 || max < min ){
+        if(this.x<1 || this.y <1 || max <= 0 || min <=0 ||max < min ||this.x*this.y>1000000 ){
             KomunikatorGen.setText("Podana wartości są nieodpowiednie");
             return;
         }
@@ -227,8 +227,12 @@ public class Scena {
     private void znajdz_wieszcholek(double x,double y,boolean prawy_lewy){
         int pozycja_x;
         int pozycja_y;
-        pozycja_x = (int) Math.floor((x)/(this.Fitszetokosc*this.Scala/this.x));
-        pozycja_y = (int) Math.floor((y)/(this.Fitwysokosc*this.Scala/this.y));
+        pozycja_x = (int) Math.floor((x)/(this.Fitszetokosc*this.Scala/this.x)+0.2/graf.dostan_wymiar_x());
+        if(pozycja_x >= graf.dostan_wymiar_x())
+            pozycja_x--;
+        pozycja_y = (int) Math.floor((y)/(this.Fitwysokosc*this.Scala/this.y)+0.2/graf.dostan_wymiar_y());
+        if(pozycja_y >= graf.dostan_wymiar_y())
+            pozycja_y--;
         if (prawy_lewy){
             graf.zeruj_dane();
             if(ktury_algorytm == 0){

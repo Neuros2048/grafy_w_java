@@ -1,7 +1,7 @@
 package algorytmy;
 
 public class Graf{
-    private Wierzcholek [] wieszcholki;
+    private Wierzcholek [] wierzcholki;
     private int x,y; 
     private class Wierzcholek {
         public int z ;
@@ -23,7 +23,7 @@ public class Graf{
         
     }
     public Graf(){
-        wieszcholki = null;
+        wierzcholki = null;
         x =0;
         y =0;
     }
@@ -31,25 +31,25 @@ public class Graf{
         this.x = x;
         this.y = y;
         int i;
-        this.wieszcholki = new Wierzcholek[x*y];
+        this.wierzcholki = new Wierzcholek[x*y];
         for (i=0;i<x*y;i++){
-            wieszcholki[i] = new Wierzcholek();
+            wierzcholki[i] = new Wierzcholek();
         }
     }
     public int dlugosc_grafu(){
-        return wieszcholki.length;
+        return wierzcholki.length;
     }
     public void okresl_scieszke(int szukane){
         while(szukane != -2){
-            wieszcholki[szukane].status = 3;
-            szukane = wieszcholki[szukane].z; 
+            wierzcholki[szukane].status = 3;
+            szukane = wierzcholki[szukane].z; 
         }
     }
     public int dostan_status(int i){
-        return wieszcholki[i].status;
+        return wierzcholki[i].status;
     }
     public void ustaw_status(int i,int status){
-        wieszcholki[i].status = status;
+        wierzcholki[i].status = status;
     }
     /**
      * 
@@ -59,13 +59,13 @@ public class Graf{
      */
     public double dostan_droge(int i,int od_1_do_4){
         if (od_1_do_4 == 1){
-            return wieszcholki[i].DL;
+            return wierzcholki[i].DL;
         }else if(od_1_do_4==2){
-            return  wieszcholki[i].DG ;
+            return  wierzcholki[i].DG ;
         }else if (od_1_do_4 == 3){
-            return wieszcholki[i].DP;
+            return wierzcholki[i].DP;
         }else if (od_1_do_4 == 4){
-            return wieszcholki[i].DD ;
+            return wierzcholki[i].DD ;
         }else{
             return -1;
         }
@@ -80,13 +80,13 @@ public class Graf{
             return false;
         }
         if (iz == i-1 && i%x != 0 ){
-            wieszcholki[i].DL = waga;
+            wierzcholki[i].DL = waga;
         }else if(iz == i+1 && i%x != x-1 ){
-            wieszcholki[i].DP = waga;
+            wierzcholki[i].DP = waga;
         }else if (dlugosc_grafu() > iz && iz == i+x){
-            wieszcholki[i].DD = waga;
+            wierzcholki[i].DD = waga;
         }else if (iz >= 0 && iz == i -x){
-            wieszcholki[i].DG = waga;
+            wierzcholki[i].DG = waga;
         }else{
             return false;
         }
@@ -94,27 +94,27 @@ public class Graf{
     }
     public void ustaw_wage(int i ,int iz,double waga){
         ustaw_droge_z(i, iz);
-        wieszcholki[i].waga = waga + wieszcholki[iz].waga; 
+        wierzcholki[i].waga = waga + wierzcholki[iz].waga; 
     }
     public double dostan_waga(int i){
-        return wieszcholki[i].waga;
+        return wierzcholki[i].waga;
     }
     public void ustaw_droge_z(int i,int iz){
-        wieszcholki[i].z = iz;
+        wierzcholki[i].z = iz;
     }
     public int dostan_droge_z(int i){
-        return wieszcholki[i].z;
+        return wierzcholki[i].z;
     }
     public void zeruj_status(){
-        for (int i = 0 ; i< wieszcholki.length ;i++){
-            wieszcholki[i].status = 0;
+        for (int i = 0 ; i< wierzcholki.length ;i++){
+            wierzcholki[i].status = 0;
         }
     }
     public void zeruj_dane(){
-        for (int i = 0 ; i< wieszcholki.length ;i++){
-            wieszcholki[i].status = 0;
-            wieszcholki[i].z = -2;
-            wieszcholki[i].waga = 0;
+        for (int i = 0 ; i< wierzcholki.length ;i++){
+            wierzcholki[i].status = 0;
+            wierzcholki[i].z = -2;
+            wierzcholki[i].waga = 0;
         }
     }
     public int dostan_wymiar_x(){

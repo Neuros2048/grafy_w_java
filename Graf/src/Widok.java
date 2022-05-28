@@ -190,7 +190,7 @@ public class Widok { //extends JPanel{
         g2D.scale((double)Dx/rozmiar/x/3*2, (double)Dy/rozmiar/y/3*2);
         int pozycja_x;
         int pozycja_y;
-        g2D.setStroke(new BasicStroke(2));
+        g2D.setStroke(new BasicStroke(4));
         g2D.setColor(Color.white);
         for (i =0 ;i<y;i++){
             for (ii = 0;ii<x;ii++){
