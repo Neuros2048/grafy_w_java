@@ -6,7 +6,7 @@ import java.util.Random;
 import graf.algorytmy.Graf;
 
 public class Pisarz {
-    Pisarz (){
+    public Pisarz (){
     }/**
     *Pisze graf do pliku
      */

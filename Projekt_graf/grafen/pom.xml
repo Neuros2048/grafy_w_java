@@ -25,6 +25,11 @@
             <artifactId>javafx-swing</artifactId>
             <version>18</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
