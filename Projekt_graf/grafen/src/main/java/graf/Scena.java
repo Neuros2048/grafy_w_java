@@ -254,7 +254,7 @@ public class Scena {
     @FXML
     void initialize() {
         assert zawartosc != null : "fx:id=\"zawartosc\" was not injected: check your FXML file 'Scena.fxml'.";
-        //puste_mejsce.setImage(new Image(getClass().getResourceAsStream("Logo.png")));
+        puste_mejsce.setImage(new Image(getClass().getResourceAsStream("Logo.png")));
         algorytm1 = new Fibonacci();
         algorytm2 = new Kolejka();
         algorytm3 = new BFS();

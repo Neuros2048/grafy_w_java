@@ -1,7 +1,6 @@
 package graf;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +22,7 @@ public class Start extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Scena"), 954, 563);
         stage.setScene(scene);
+        stage.getIcons().add(new javafx.scene.image.Image(Start.class.getResourceAsStream("Logo.png")));
         stage.show();
     }
 
