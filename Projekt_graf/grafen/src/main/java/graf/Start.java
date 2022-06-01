@@ -21,6 +21,7 @@ public class Start extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Scena"), 954, 563);
+        System.out.println(System.getProperty("user.dir"));
         stage.setScene(scene);
         stage.getIcons().add(new javafx.scene.image.Image(Start.class.getResourceAsStream("Logo.png")));
         stage.show();

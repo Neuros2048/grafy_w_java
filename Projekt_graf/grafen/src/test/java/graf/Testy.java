@@ -68,7 +68,6 @@ public class Testy {
         graf.ustaw_droge_z(11, 12);
         assertEquals(12, graf.dostan_droge_z(11));
         graf.ustaw_wage(4, 3, 17.324);
-        //assertEquals(17.324, graf.dostan_waga(4));
         assertTrue(17.324==graf.dostan_waga(4));
     }
     @Test
@@ -88,8 +87,6 @@ public class Testy {
         algorytm.rozwiarz(0);
         assertTrue(1==graf.dostan_waga(1));
         assertTrue(6==graf.dostan_waga(15));
-        //assertEquals(1, graf.dostan_waga(1));
-        //assertEquals(6, graf.dostan_waga(15));
     }
     @Test
     public void Test_Dijkstry_Fibonacci_(){
@@ -108,8 +105,6 @@ public class Testy {
         algorytm.rozwiarz(0);
         assertTrue(1==graf.dostan_waga(1));
         assertTrue(30==graf.dostan_waga(15));
-        //assertEquals(1, graf.dostan_waga(1));
-        //assertEquals(30, graf.dostan_waga(15));
 
     }@Test
     public void Test_Dijkstry_Kolejki_(){
@@ -128,8 +123,6 @@ public class Testy {
         algorytm.rozwiarz(0);
         assertTrue(1==graf.dostan_waga(1));
         assertTrue(30==graf.dostan_waga(15));
-        //assertEquals(1, graf.dostan_waga(1));
-        //assertEquals(30, graf.dostan_waga(15));
     }
     @Test
     public void Test_Pisarz_(){
