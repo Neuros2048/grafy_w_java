@@ -1,6 +1,4 @@
 package graf;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import graf.algorytmy.*;
 import javafx.embed.swing.SwingFXUtils;

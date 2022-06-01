@@ -20,19 +20,20 @@ public class Pisarz {
         int i,ii;
         Random losowa =new Random();
         try {
+        pioro.write(String.valueOf(y)+" "+String.valueOf(x)+"\n");
         for (i = 0; i < y; i++) {
 			for (ii = 0; ii < x; ii++) {
 				if ((ii + 1) < x){
-                    pioro.write(String.valueOf(ii + i * x + 1)+" :"+String.valueOf(losowa.nextDouble()*max+min*max+min)+"   ");
+                    pioro.write(String.valueOf(ii + i * x + 1)+" :"+String.valueOf(losowa.nextDouble()*(max-min)+min)+"   ");
                 }
 				if ((i + 1) < y){
-                    pioro.write(String.valueOf(ii + i * x + x)+" :"+String.valueOf(losowa.nextDouble()*max+min)+"   ");
+                    pioro.write(String.valueOf(ii + i * x + x)+" :"+String.valueOf(losowa.nextDouble()*(max-min)+min)+"   ");
                 }
 				if ((ii - 1) > -1){
-                    pioro.write(String.valueOf(ii + i * x - 1)+" :"+String.valueOf(losowa.nextDouble()*max+min)+"   ");
+                    pioro.write(String.valueOf(ii + i * x - 1)+" :"+String.valueOf(losowa.nextDouble()*(max-min)+min)+"   ");
                 }
 				if ((i - 1) > -1){
-                    pioro.write(String.valueOf(ii + i * x - x)+" :"+String.valueOf(losowa.nextDouble()*max+min)+"   ");
+                    pioro.write(String.valueOf(ii + i * x - x)+" :"+String.valueOf(losowa.nextDouble()*(max-min)+min)+"   ");
                 }
                 
                     pioro.write("\n");
