@@ -128,7 +128,7 @@ public class Scena {
             KomunikatorGen.setText("Podana wartości są nieodpowiednie");
             return;
         }
-        if(generator.napisz(x,y, max, min,"Projekt_graf/grafen/Pliki_textowe/"+NAZWAG2.getText())){
+        if(generator.napisz(x,y, max, min,NAZWAG2.getText())){
             KomunikatorZap.setText("Udało się wygenerować plik");
             return;
         }
@@ -185,7 +185,7 @@ public class Scena {
     void wcisnienty(ActionEvent event) {
 
         Czytacz plik = new Czytacz();
-        if(plik.dodaj_plik("Projekt_graf/grafen/Pliki_textowe/"+zawartosc.getText())){
+        if(plik.dodaj_plik(zawartosc.getText())){
             Komunikator.setText("Udało się odczytać plik");
             this.dane_pliku = plik;
             this.y = dane_pliku.czytaj_int();
