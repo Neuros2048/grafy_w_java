@@ -1,0 +1,16 @@
+graf\algorytmy\Kolejka.class
+graf\algorytmy\Graf.class
+graf\Pisarz.class
+graf\algorytmy\Fibonacci.class
+graf\Czytacz.class
+graf\algorytmy\Dijkstra.class
+graf\algorytmy\BFS.class
+graf\Scena.class
+graf\algorytmy\Algorytm_przechodzenia.class
+graf\Start.class
+graf\Main.class
+module-info.class
+graf\algorytmy\Graf$Wierzcholek.class
+graf\algorytmy\Kolejka$Lista.class
+graf\Widok.class
+graf\algorytmy\Fibonacci$punkt.class
